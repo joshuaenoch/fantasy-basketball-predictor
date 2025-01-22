@@ -1,28 +1,31 @@
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import playercareerstats
 import pandas as pd
-
-testing_with = [
-    "Jaylen Brown",
-    "Jalen Williams",
-    "Jalen Johnson",
-    "Jalen Brunson",
-    "Jaylin Williams",
-    "Jalen Suggs",
-    "Jalen Green",
-]
+import time
 
 players = players.get_active_players()
-selected_players = [player for player in players if player["full_name"] in testing_with]
+selected_players = players
 
 all_stats = []
-for player in selected_players:
-    career = playercareerstats.PlayerCareerStats(
-        player_id=player["id"]
-    ).get_data_frames()[0]
-    player_stats_2025 = career[career["SEASON_ID"] == "2024-25"].iloc[0]
+batch_size = 10
+delay_time = 10
 
-    all_stats.append(player_stats_2025.values)
+for i in range(0, len(selected_players), batch_size):
+    batch_players = selected_players[i : i + batch_size]
+
+    for player in batch_players:
+        career = playercareerstats.PlayerCareerStats(
+            player_id=player["id"]
+        ).get_data_frames()[0]
+
+        player_stats_2025 = career[career["SEASON_ID"] == "2024-25"]
+
+        if not player_stats_2025.empty:
+            player_stats_2025 = player_stats_2025.iloc[0]
+            all_stats.append(player_stats_2025.values)
+
+    print(f"still going... {i+1}/{len(selected_players)}")
+    time.sleep(delay_time)
 
 stats_df = pd.DataFrame(
     all_stats,
@@ -57,7 +60,9 @@ stats_df = pd.DataFrame(
     ],
 )
 
-stats_df["Player_Name"] = [player["full_name"] for player in selected_players]
+stats_df["Player_Name"] = [
+    player["full_name"] for player in selected_players[: len(all_stats)]
+]
 
 stats_df = stats_df[
     ["Player_Name"] + [col for col in stats_df.columns if col != "Player_Name"]
@@ -67,6 +72,8 @@ per_game = [
     "MIN",
     "FGM",
     "FGA",
+    "FG3M",
+    "FG3A",
     "FTM",
     "FTA",
     "OREB",
