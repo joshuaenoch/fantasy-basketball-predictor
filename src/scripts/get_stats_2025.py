@@ -3,33 +3,14 @@ from nba_api.stats.endpoints import playercareerstats
 import pandas as pd
 import time
 
+batch_size = 20
+delay_time = 15
+
 players = players.get_active_players()
 selected_players = players
-
-all_stats = []
-batch_size = 10
-delay_time = 10
-
-for i in range(0, len(selected_players), batch_size):
-    batch_players = selected_players[i : i + batch_size]
-
-    for player in batch_players:
-        career = playercareerstats.PlayerCareerStats(
-            player_id=player["id"]
-        ).get_data_frames()[0]
-
-        player_stats_2025 = career[career["SEASON_ID"] == "2024-25"]
-
-        if not player_stats_2025.empty:
-            player_stats_2025 = player_stats_2025.iloc[0]
-            all_stats.append(player_stats_2025.values)
-
-    print(f"still going... {i+1}/{len(selected_players)}")
-    time.sleep(delay_time)
-
-stats_df = pd.DataFrame(
-    all_stats,
+stats = pd.DataFrame(
     columns=[
+        "Player_Name",
         "PLAYER_ID",
         "SEASON_ID",
         "LEAGUE_ID",
@@ -57,16 +38,46 @@ stats_df = pd.DataFrame(
         "TOV",
         "PF",
         "PTS",
-    ],
+    ]
 )
 
-stats_df["Player_Name"] = [
-    player["full_name"] for player in selected_players[: len(all_stats)]
-]
+redoing = []
 
-stats_df = stats_df[
-    ["Player_Name"] + [col for col in stats_df.columns if col != "Player_Name"]
-]
+
+def get_stats(selected_players):
+    for i in range(0, len(selected_players), batch_size):
+        batch_players = selected_players[i : i + batch_size]
+
+        for player in batch_players:
+            career = playercareerstats.PlayerCareerStats(
+                player_id=player["id"]
+            ).get_data_frames()[0]
+            player_stats_2025 = career[career["SEASON_ID"] == "2024-25"]
+
+            if not player_stats_2025.empty:
+                player_stats_2025 = player_stats_2025.iloc[0]
+
+                player_stats_2025["Player_Name"] = player["full_name"]
+
+                if (player_stats_2025 == 0).sum() >= 3:
+                    redoing.append(player)
+
+                stats.loc[len(stats)] = player_stats_2025
+
+        print(f"still going... {i+1}/{len(selected_players)}")
+        time.sleep(delay_time)
+
+
+get_stats(selected_players)
+
+# before_length = 0
+# count = 0
+# while len(redoing) > 0 or count < 2:
+#     before_length = len(redoing)
+#     get_stats(redoing)
+#     if before_length == len(redoing):
+#         count += 1
+#     redoing = []
 
 per_game = [
     "MIN",
@@ -87,7 +98,7 @@ per_game = [
     "PTS",
 ]
 
-for i in per_game:
-    stats_df[i] = stats_df[i] / stats_df["GP"]
+for col in per_game:
+    stats[col] = stats[col] / stats["GP"]
 
-stats_df.to_csv("stats.csv", index=False)
+stats.to_csv("stats.csv", index=False)

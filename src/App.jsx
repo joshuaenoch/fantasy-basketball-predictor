@@ -1,12 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Predictions from "./pages/Predictions";
+import Navbar from "./components/Navbar"
 
-function App() {
-  return(
-    <div></div>
-  )
+
+export default function App() {
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Predictions />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);

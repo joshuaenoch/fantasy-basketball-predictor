@@ -5,20 +5,6 @@ from datetime import datetime, timedelta
 
 player_stats = pd.read_csv("stats.csv")
 
-months_convert = {
-    "JAN": 1,
-    "FEB": 2,
-    "MAR": 3,
-    "APR": 4,
-    "MAY": 5,
-    "JUN": 6,
-    "JUL": 7,
-    "AUG": 8,
-    "SEP": 9,
-    "OCT": 10,
-    "NOV": 11,
-    "DEC": 12,
-}
 stats_weight = {
     "points": 1,
     "blocks": 4,
@@ -33,6 +19,7 @@ stats_weight = {
     "tpm": 1,
 }
 
+all_points = []
 for index, row in player_stats.iterrows():
     points = (
         row["FGM"] * stats_weight["fgm"]
@@ -47,4 +34,10 @@ for index, row in player_stats.iterrows():
         + row["TOV"] * stats_weight["turnovers"]
         + row["PTS"] * stats_weight["points"]
     )
-    print(f'{row["Player_Name"]}: {points}')
+    player = []
+    player.append(row["Player_Name"])
+    player.append(points)
+    all_points.append(player)
+
+all_points = pd.DataFrame(all_points, columns=["Player_Name", "Points"])
+all_points.to_csv("points.csv", index=False)
