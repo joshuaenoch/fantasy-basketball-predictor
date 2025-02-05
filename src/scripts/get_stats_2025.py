@@ -101,4 +101,4 @@ per_game = [
 for col in per_game:
     stats[col] = stats[col] / stats["GP"]
 
-stats.to_csv("stats.csv", index=False)
+stats.to_csv("season_data/2024-2025.csv", index=False)

@@ -130,4 +130,4 @@ for dataset in source_one + source_two + source_three:
     df.to_csv(f"computed_data/new-{dataset}.csv", index=False)
     print("finished", dataset)
 
-# all_points.to_csv("fppg_py.csv", index=False)
+all_points.to_csv("outputs/fppg_py.csv", index=False)
