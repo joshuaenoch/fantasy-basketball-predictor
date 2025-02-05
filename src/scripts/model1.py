@@ -5,7 +5,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 import numpy as np
 
-points_data = pd.read_csv("fppg_py.csv")
+# data
+
+points_data = pd.read_csv("outputs/fppg_py.csv")
 
 data_year1 = pd.read_csv("computed_data/new-2014-2015.csv")
 data_year2 = pd.read_csv("computed_data/new-2015-2016.csv")
@@ -17,7 +19,7 @@ data_year7 = pd.read_csv("computed_data/new-2020-2021.csv")
 data_year8 = pd.read_csv("computed_data/new-2021-2022.csv")
 data_year9 = pd.read_csv("computed_data/new-2022-2023.csv")
 data_year10 = pd.read_csv("computed_data/new-2023-2024.csv")
-test_data = pd.read_csv("computed_data/new-2024-2025.csv")
+predicting_data = pd.read_csv("computed_data/new-2024-2025.csv")
 
 data = [
     data_year1,
@@ -29,8 +31,9 @@ data = [
     data_year7,
     data_year8,
     data_year9,
-    data_year10,
 ]
+
+# fitting/transforming
 
 num_atts = [
     "MIN",
@@ -54,6 +57,8 @@ numeric_transformer = SimpleImputer(strategy="constant", fill_value=0)
 preprocessor = ColumnTransformer(transformers=[("num", numeric_transformer, num_atts)])
 models = []
 
+# model building
+
 for year in range(len(data)):
     X = data[year][num_atts + cat_atts]
     y = data[year]["FPPG"]
@@ -68,10 +73,12 @@ for year in range(len(data)):
 
 print("finished models building")
 
+# model training
+
 predicted_fppgs = []
 
 for year in range(len(models)):
-    X_test = test_data[num_atts + cat_atts]
+    X_test = predicting_data[num_atts + cat_atts]
     X_test = preprocessor.transform(X_test)
     predicted_fppg = models[year].predict(X_test)
 
@@ -80,5 +87,26 @@ for year in range(len(models)):
 predicted_fppgs = np.array(predicted_fppgs)
 average_predicted_fppg = predicted_fppgs.mean(axis=0)
 
-test_data["Predicted_FPPG"] = average_predicted_fppg
-test_data[["Player", "Predicted_FPPG"]].to_csv("model1_predictions.csv", index=False)
+predicting_data["Predicted_FPPG"] = average_predicted_fppg
+predicting_data[["Player", "Predicted_FPPG"]].to_csv(
+    "outputs/model1_predictions.csv", index=False
+)
+
+# testing
+
+# from sklearn.metrics import mean_absolute_error
+
+# predicting_data = pd.merge(
+#     predicting_data,
+#     points_data[["full_name", "2023-2024"]],
+#     left_on="Player",
+#     right_on="full_name",
+#     how="left",
+# )
+
+# actual_fppg = predicting_data["FPPG"].dropna().values
+# predicted_fppg = predicting_data["Predicted_FPPG"].dropna().values
+
+# if len(actual_fppg) == len(predicted_fppg):
+#     mae = mean_absolute_error(actual_fppg, predicted_fppg)
+#     print(f"Mean Absolute Error (MAE): {mae}")
