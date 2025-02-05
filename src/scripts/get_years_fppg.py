@@ -83,11 +83,16 @@ for dataset in source_one + source_two + source_three:
             df.groupby("Player")
             .agg(
                 {
+                    "TEAM_ABBREVIATION": "first",
+                    "MIN": "mean",
                     "FGM": "mean",
                     "FGA": "mean",
                     "FG3M": "mean",
+                    "FG3A": "mean",
                     "FTM": "mean",
                     "FTA": "mean",
+                    "OREB": "mean",
+                    "DREB": "mean",
                     "REB": "mean",
                     "AST": "mean",
                     "STL": "mean",
@@ -122,7 +127,7 @@ for dataset in source_one + source_two + source_three:
     # right here, add all the points as a new column "FPPG" to the current dataset
     df["FPPG"] = fppg
 
-    df.to_csv(f"season_data/{dataset}.csv", index=False)
+    df.to_csv(f"computed_data/new-{dataset}.csv", index=False)
     print("finished", dataset)
 
 # all_points.to_csv("fppg_py.csv", index=False)
