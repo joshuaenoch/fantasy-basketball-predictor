@@ -1,3 +1,7 @@
+* {
+  font-family: Verdana, Arial, sans-serif
+}
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
@@ -14,4 +18,47 @@ th {
   padding: 10px;
   background-color:grey;
   color: white;
+}
+
+/* .checkboxes {
+  display: "flex";
+  flex-direction: "column";
+  margin-bottom: "20px";
+} */
+
+select {
+  width: 100%;
+  padding: 5px;
+  display: inline-block;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  margin: 5px 0;
+}
+
+button {
+  padding: 5px;
+  display: inline-block;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+input {
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+th.sorted {
+  background-color: rgb(105, 105, 105);
+  color: white;
+}
+
+td.sorted{
+  background-color: rgb(157, 157, 157);
+  color: white;
+}
+
+tr:hover {
+  background-color: #dbdbdb;
 }

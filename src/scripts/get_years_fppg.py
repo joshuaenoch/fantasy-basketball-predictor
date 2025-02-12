@@ -16,7 +16,7 @@ source_one = [
 source_two = ["2022-2023", "2023-2024"]
 source_three = ["2024-2025"]
 
-# all active players
+# get all active players and initialize dataframe
 players = players.get_active_players()
 all_points = pd.DataFrame(
     columns=["full_name"]
@@ -25,7 +25,7 @@ all_points = pd.DataFrame(
 )
 all_points["full_name"] = [player["full_name"] for player in players]
 
-# stats weights for points calculation, will be customizeable by user
+# stats weights for points calculation, will be customizable by user
 stats_weight = {
     "points": 1,
     "blocks": 4,
@@ -66,14 +66,13 @@ def get_averages(data):
     return data
 
 
+# get the stats for each year
 for dataset in source_one + source_two + source_three:
-
-    # initial and end data
     df = pd.read_csv(f"season_data/{dataset}.csv")
     all_points[dataset] = np.zeros(len(all_points))
     all_points[f"gp_{dataset}"] = np.zeros(len(all_points))
 
-    print("initialized", dataset)
+    print("Initialized", dataset)
 
     # make the data uniform
     if dataset in source_one:
@@ -107,6 +106,7 @@ for dataset in source_one + source_two + source_three:
     elif dataset in source_three:
         df = df.rename(columns={"Player_Name": "Player"})
 
+    # calculate FPPG
     fppg = []
     for index, row in df.iterrows():
         points = (
@@ -124,10 +124,20 @@ for dataset in source_one + source_two + source_three:
         )
         fppg.append(points)
 
-    # right here, add all the points as a new column "FPPG" to the current dataset
+    # add FPPG to the current dataset
     df["FPPG"] = fppg
 
-    df.to_csv(f"computed_data/new-{dataset}.csv", index=False)
-    print("finished", dataset)
+    # update all_points with FPPG and GP for the current year
+    for index, row in df.iterrows():
+        player_name = row["Player"]
+        # find the corresponding row in all_points
+        player_index = all_points.index[all_points["full_name"] == player_name].tolist()
+        if player_index:
+            player_index = player_index[0]
+            all_points.at[player_index, dataset] = row["FPPG"]
+            all_points.at[player_index, f"gp_{dataset}"] = row["GP"]
 
+    print("Finished", dataset)
+
+print(all_points)
 all_points.to_csv("outputs/fppg_py.csv", index=False)
