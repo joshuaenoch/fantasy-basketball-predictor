@@ -8,6 +8,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Predictions />} />
       </Routes>

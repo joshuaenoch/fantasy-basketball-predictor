@@ -3,21 +3,33 @@
 }
 
 table {
-  font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
 td {
-  border: 1px solid grey;
+  border: 1px solid rgb(197, 197, 197);
   padding: 10px;
 }
 
 th {
-  border: 1px solid black;
   padding: 10px;
-  background-color:grey;
+  background-color:rgb(147, 147, 147);
   color: white;
+}
+
+th:first-child, td:first-child {
+  position: sticky;
+  left: 0;
+  background-color: white;
+}
+
+th:first-child{
+  background-color:rgb(147, 147, 147);
+}
+
+td:first-child:hover {
+  background-color: #dbdbdb;
 }
 
 /* .checkboxes {
@@ -61,4 +73,12 @@ td.sorted{
 
 tr:hover {
   background-color: #dbdbdb;
+}
+
+input[type="text"] {
+  width: 400px;
+  padding: 5px;
+  position: sticky;
+  left: 0;
+  margin-bottom: 10px;
 }
