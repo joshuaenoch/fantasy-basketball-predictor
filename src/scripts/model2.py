@@ -65,8 +65,11 @@ for player, series in players_series.items():
         except Exception as e:
             print(f"Error {e} with {player}")
 
+predictions_df = pd.DataFrame(
+    list(predictions.items()), columns=["Player", "Prediction"]
+)
 for player, prediction in predictions.items():
-    print(f"{player}: Predicted result = {prediction:.2f}")
+    predictions_df.to_csv("outputs/model2_predictions.csv", index=False)
 
 # Testing
 from sklearn.metrics import (
@@ -76,7 +79,7 @@ from sklearn.metrics import (
 )
 
 actual_fppg = (
-    data[data["full_name"].isin(predictions.keys())]["2023-2024"].dropna().values
+    data[data["full_name"].isin(predictions.keys())]["2024-2025"].dropna().values
 )
 predicted_fppg = np.array(list(predictions.values()))
 

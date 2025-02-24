@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor, VotingRegressor
 import numpy as np
 
 # data
@@ -87,29 +87,36 @@ for year in range(len(data)):
 
     model.fit(train_X, train_y)
 
-    models.append(model)
+    models.append((f"model_{year+1}", model))
 
 print("finished models building")
 
-# model training
+# predicting
 
-predicted_fppgs = []
+voting_regressor = VotingRegressor(estimators=models)
 
-for year in range(len(models)):
-    X_test = predicting_data[num_atts + cat_atts]
-    X_test = preprocessor.transform(X_test)
-    predicted_fppg = models[year].predict(X_test)
+X_test = predicting_data[num_atts + cat_atts]
+X_test = preprocessor.transform(X_test)
+predicted_fppg = voting_regressor.fit(X_test, predicting_data["FPPG"]).predict(X_test)
+predicting_data["Predicted_FPPG"] = predicted_fppg
 
-    predicted_fppgs.append(predicted_fppg)
+# predicted_fppgs = []
 
-predicted_fppgs = np.array(predicted_fppgs)
-average_predicted_fppg = predicted_fppgs.mean(axis=0)
+# for year in range(len(models)):
+#     X_test = predicting_data[num_atts + cat_atts]
+#     X_test = preprocessor.transform(X_test)
+#     predicted_fppg = models[year].predict(X_test)
 
-predicting_data["Predicted_FPPG"] = average_predicted_fppg
+#     predicted_fppgs.append(predicted_fppg)
 
-# predicting_data[["Player", "Predicted_FPPG"]].to_csv(
-#     "outputs/model1_predictions.csv", index=False
-# )
+# predicted_fppgs = np.array(predicted_fppgs)
+# average_predicted_fppg = predicted_fppgs.mean(axis=0)
+
+# predicting_data["Predicted_FPPG"] = average_predicted_fppg
+
+predicting_data[["Player", "Predicted_FPPG"]].to_csv(
+    "outputs/model1_predictions.csv", index=False
+)
 
 # testing
 
@@ -120,13 +127,13 @@ from sklearn.metrics import (
     mean_absolute_percentage_error,
 )
 
-predicting_data = pd.merge(
-    predicting_data,
-    points_data[["full_name", "2023-2024"]],
-    left_on="Player",
-    right_on="full_name",
-    how="left",
-)
+# predicting_data = pd.merge(
+#     predicting_data,
+#     points_data[["full_name", "2023-2024"]],
+#     left_on="Player",
+#     right_on="full_name",
+#     how="left",
+# )
 
 actual_fppg = predicting_data["FPPG"].dropna().values
 predicted_fppg = predicting_data["Predicted_FPPG"].dropna().values
