@@ -18,8 +18,8 @@ data_year6 = pd.read_csv("computed_data/new-2019-2020.csv")
 data_year7 = pd.read_csv("computed_data/new-2020-2021.csv")
 data_year8 = pd.read_csv("computed_data/new-2021-2022.csv")
 data_year9 = pd.read_csv("computed_data/new-2022-2023.csv")
-predicting_data = pd.read_csv("computed_data/new-2023-2024.csv")
-# predicting_data = pd.read_csv("computed_data/new-2024-2025.csv")
+data_year10 = pd.read_csv("computed_data/new-2023-2024.csv")
+predicting_data = pd.read_csv("computed_data/new-2024-2025.csv")
 
 data = [
     data_year1,
@@ -31,6 +31,7 @@ data = [
     data_year7,
     data_year8,
     data_year9,
+    data_year10,
 ]
 
 # fitting/transforming
@@ -66,7 +67,7 @@ models = []
 #     "n_estimators": [100, 200, 300],
 #     "max_features": ["auto", "sqrt", "log2"],
 #     "max_depth": [None, 9, 11, 13],
-#     "min_samples_split": [2, 6, 10, None],
+#     "min_samples_split": [0, 1, 2, 6, 10, None],
 #     "bootstrap": [True, False],
 #     "random_state": [1],
 # }
@@ -78,9 +79,7 @@ for year in range(len(data)):
     X = preprocessor.fit_transform(X)
     train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=1)
 
-    model = RandomForestRegressor(
-        random_state=1, max_features="sqrt", n_estimators=100, min_samples_split=2
-    )
+    model = RandomForestRegressor(random_state=1, n_estimators=300)
     # grid_search = GridSearchCV(model, params, cv=5, n_jobs=-1, verbose=2)
     # grid_search.fit(train_X, train_y)
     # print("Params", grid_search.best_params_)

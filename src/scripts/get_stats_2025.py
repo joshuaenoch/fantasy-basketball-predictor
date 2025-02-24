@@ -11,6 +11,7 @@ selected_players = players
 stats = pd.DataFrame(
     columns=[
         "Player_Name",
+        "Pos"
         "PLAYER_ID",
         "SEASON_ID",
         "LEAGUE_ID",
@@ -63,6 +64,7 @@ def get_stats(selected_players):
                     redoing.append(player)
 
                 stats.loc[len(stats)] = player_stats_2025
+
 
         print(f"still going... {i+1}/{len(selected_players)}")
         time.sleep(delay_time)
