@@ -23,7 +23,7 @@ export default function Predictions() {
   const [filteredData, setFilteredData] = useState(data);
 
   useEffect(() => {
-    fetch('/src/scripts/computed_data/new-2024-2025.csv')
+    fetch('/src/scripts/outputs/full_data.csv')
       .then(response => response.text())
       .then(result => {
         toArray(result);
@@ -63,23 +63,9 @@ export default function Predictions() {
 
   return (
     <div style={{display: "flex", padding: "40px"}}>
-      <div style={{marginRight: "30px", minWidth: "150px", maxWidth: "250px"}}>
-        <div className="checkboxes" style={{display: "flex", flexDirection: "column", marginBottom: "20px", gap: "10px"}}>
-          <div>
-            <label for="model1" style={{marginRight: "5px"}}>Model 1</label>
-            <input type="checkbox" id="model1" name="model1" value="model1" />
-          </div>
-          <div>
-            <label for="model1" style={{marginRight: "5px"}}>Model 2</label>
-            <input type="checkbox" id="model2" name="model2" value="model2" />
-          </div>
-          <div>
-            <label for="fullstats" style={{marginRight: "5px"}}>Show Full Stats</label>
-            <input type="checkbox" id="fullstats" name="fullstats" value="fullstats" />
-          </div>
-        </div>
-        <div>
-          <select name="ruleset" id="ruleset" onChange={(e) => setIsStandard(e.target.value === "standard")}W>
+      <div style={{marginRight: "30px"}}>
+        <div className="stat-block">
+          <select name="ruleset" id="ruleset" onChange={(e) => setIsStandard(e.target.value === "standard")}>
             <option value="standard">Standard Ruleset</option>
             <option value="custom">Custom Ruleset</option>
           </select>
@@ -98,19 +84,51 @@ export default function Predictions() {
             <button>Apply</button>
           </div>
         </div>
+        <div className="stat-block">
+          <strong>About</strong>
+          <div>Yap yap yap aoeir aergaoi oijea go aoiegroa iegoaeigr oaierjg</div>
+          <button>Read More</button>
+          <button>Compare Players</button>
+          <button>Your League</button>
+        </div>
       </div>
       <div>
       </div>
-      <div style={{overflowX: "auto", width: "100%"}}>
-        <input type="text" placeholder="Search for player" value={search} onChange={(e) => setSearch(e.target.value)}/>
+      <div className="table-container" style={{overflowX: "auto", width: "100%"}}>
+        <div style={{display: "flex", gap: "15px"}}>
+          <div>
+            <label for="model1" style={{marginRight: "5px"}}>Model 1</label>
+            <input type="checkbox" id="model1" name="model1" value="model1" />
+          </div>
+          <div>
+            <label for="model1" style={{marginRight: "5px"}}>Model 2</label>
+            <input type="checkbox" id="model2" name="model2" value="model2" />
+          </div>
+          <div>
+            <label for="fullstats" style={{marginRight: "5px"}}>Full Stats</label>
+            <input type="checkbox" id="fullstats" name="fullstats" value="fullstats" />
+          </div>
+          <input type="text" placeholder="Search for player" value={search} onChange={(e) => setSearch(e.target.value)}/>
+        </div>
         <table>
           <thead>
             <tr>
+              <th colspan="1"></th>
+              <th colspan="4">Status</th>
+              <th colspan="1">Model 1 Predictions</th>
+              <th colspan="1">Model 2 Predictions</th>
+              <th colspan="13">Full Statistics</th>
+            </tr>
+            <tr>
               <th onClick = {() => setSorted(0)} className={sorted === 0 ? "sorted" : ""}>Name</th>
               <th onClick = {() => setSorted(5)} className={sorted === 5 ? "sorted" : ""}>Team</th>
-              <th onClick = {() => setSorted(28)} className={sorted === 28 ? "sorted" : ""}>FPPG</th>
+              <th onClick = {() => setSorted(28)} className={sorted === 28 ? "sorted" : ""}> Current FPPG</th>
               <th onClick = {() => setSorted(7)} className={sorted === 7 ? "sorted" : ""}>Games Played</th>
               <th onClick = {() => setSorted(8)} className={sorted === 8 ? "sorted" : ""}>Games Started</th>
+
+              <th onClick = {() => setSorted(29)} className={sorted === 29 ? "sorted" : ""}>Final FPPG</th>
+              <th onClick = {() => setSorted(30)} className={sorted === 30 ? "sorted" : ""}>Final FPPG</th>
+
 
               <th onClick = {() => setSorted(27)} className={sorted === 27 ? "sorted" : ""}>PPG</th>
               <th onClick = {() => setSorted(9)} className={sorted === 9 ? "sorted" : ""}>MPG</th>
@@ -135,6 +153,9 @@ export default function Predictions() {
                 <td className={sorted === 28 ? "sorted" : ""}>{row[28]}</td>
                 <td className={sorted === 7 ? "sorted" : ""}>{row[7]}</td>
                 <td className={sorted === 8 ? "sorted" : ""}>{row[8]}</td>
+
+                <td className={sorted === 29 ? "sorted" : ""}>{row[29]}</td>
+                <td className={sorted === 30 ? "sorted" : ""}>{row[30]}</td>
 
                 <td className={sorted === 27 ? "sorted" : ""}>{row[27]}</td>
                 <td className={sorted === 9 ? "sorted" : ""}>{row[9]}</td>

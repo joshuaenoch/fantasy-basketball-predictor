@@ -66,7 +66,7 @@ for player, series in players_series.items():
             print(f"Error {e} with {player}")
 
 predictions_df = pd.DataFrame(
-    list(predictions.items()), columns=["Player", "Prediction"]
+    list(predictions.items()), columns=["Player", "Predicted_FPPG"]
 )
 for player, prediction in predictions.items():
     predictions_df.to_csv("outputs/model2_predictions.csv", index=False)
