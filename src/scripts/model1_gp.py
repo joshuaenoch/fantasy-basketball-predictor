@@ -23,7 +23,6 @@ gp_columns = [
     "gp_2021-2022",
     "gp_2022-2023",
     "gp_2023-2024",
-    "gp_2024-2025",
 ]
 
 
@@ -43,16 +42,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 model = RandomForestRegressor(random_state=1, n_estimators=300)
 model.fit(X_train, y_train)
 
-y_pred = model.predict(X_test)
+y_pred = model.predict(y)
 y_pred = np.round(y_pred)
 
-test_indices = X_test.index
-
-test_data = data.loc[test_indices].copy()
-test_data["Predicted_GP"] = y_pred
-
-
-print(test_data)
+data["Predicted_GP"] = y_pred
 
 
 print("Mean Absolute Error:", mean_absolute_error(y_test, y_pred))
