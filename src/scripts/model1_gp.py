@@ -6,7 +6,6 @@ from sklearn.metrics import (
     mean_absolute_error,
     mean_squared_error,
     mean_absolute_percentage_error,
-    mean_squared_error,
 )
 
 data = pd.read_csv("outputs/gp_data.csv").dropna()
@@ -42,15 +41,25 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 model = RandomForestRegressor(random_state=1, n_estimators=300)
 model.fit(X_train, y_train)
 
-y_pred = model.predict(y)
-y_pred = np.round(y_pred)
+y_pred_full = model.predict(X)
+y_pred_full = np.round(y_pred_full)
 
-data["Predicted_GP"] = y_pred
+data["Predicted_GP"] = y_pred_full
 
-print(data)
+pred_gp = pd.DataFrame()
+pred_gp["Player"] = data["full_name"]
+pred_gp["Predicted_GP"] = y_pred_full
+
+pred_gp.to_csv("outputs/model1_gp_predictions.csv", index=False)
 
 
-print("Mean Absolute Error:", mean_absolute_error(y_test, y_pred))
-print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
-print("Root Mean Squared Error:", np.sqrt(mean_squared_error(y_test, y_pred)))
-print("Mean Absolute Percentage Error:", mean_absolute_percentage_error(y_test, y_pred))
+y_pred_test = model.predict(X_test)
+y_pred_test = np.round(y_pred_test)
+
+print("Mean Absolute Error:", mean_absolute_error(y_test, y_pred_test))
+print("Mean Squared Error:", mean_squared_error(y_test, y_pred_test))
+print("Root Mean Squared Error:", np.sqrt(mean_squared_error(y_test, y_pred_test)))
+print(
+    "Mean Absolute Percentage Error:",
+    mean_absolute_percentage_error(y_test, y_pred_test),
+)

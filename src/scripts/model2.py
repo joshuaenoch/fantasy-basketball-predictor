@@ -41,9 +41,6 @@ for index, row in data.iterrows():
             player_minutes.append(pd.to_numeric(minutes_value, errors="coerce"))
     min_series[player_name] = pd.Series(player_minutes).dropna().reset_index(drop=True)
 
-print(players_series["Steven Adams"])
-print(min_series["Steven Adams"])
-
 
 # Model function
 def predict(series, exog, order=(1, 1, 1), seasonal_order=(0, 0, 0, 0)):
@@ -68,8 +65,8 @@ for player, series in players_series.items():
 predictions_df = pd.DataFrame(
     list(predictions.items()), columns=["Player", "Predicted_FPPG"]
 )
-for player, prediction in predictions.items():
-    predictions_df.to_csv("outputs/model2_predictions.csv", index=False)
+# for player, prediction in predictions.items():
+#     predictions_df.to_csv("outputs/model2_predictions.csv", index=False)
 
 # Testing
 from sklearn.metrics import (
