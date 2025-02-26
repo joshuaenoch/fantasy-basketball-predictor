@@ -6,6 +6,7 @@ export default function Navbar() {
   return (
     <div className="navbar">
       <Link to="/">Statistics</Link>
+      <Link to ="/compare">Compare Players</Link>
       <Link to="/league">Your League</Link>
     </div>
   )

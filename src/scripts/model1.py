@@ -95,9 +95,25 @@ print("finished models building")
 
 voting_regressor = VotingRegressor(estimators=models)
 
+combined_train_X = []
+combined_train_y = []
+
+for year in range(len(data)):
+    X = data[year][num_atts + cat_atts]
+    y = data[year]["FPPG"]
+    X = preprocessor.transform(X)
+    combined_train_X.append(X)
+    combined_train_y.append(y)
+
+combined_train_X = np.vstack(combined_train_X)
+combined_train_y = np.concatenate(combined_train_y)
+
+voting_regressor.fit(combined_train_X, combined_train_y)
+
+# Predicting
 X_test = predicting_data[num_atts + cat_atts]
 X_test = preprocessor.transform(X_test)
-predicted_fppg = voting_regressor.fit(X_test, predicting_data["FPPG"]).predict(X_test)
+predicted_fppg = voting_regressor.predict(X_test)
 predicting_data["Predicted_FPPG"] = predicted_fppg
 
 # predicted_fppgs = []

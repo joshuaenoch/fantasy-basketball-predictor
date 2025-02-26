@@ -1,21 +1,35 @@
-import requests
-from bs4 import BeautifulSoup
+import pandas as pd
 
+data = pd.read_csv("computed_data/chainging.csv")
 
-def get_player_position(player_name):
-    base_url = "https://www.basketball-reference.com"
-    search_url = f"{base_url}/search/search.fcgi?search={player_name.replace(' ', '+')}"
-    search_response = requests.get(search_url)
-    search_soup = BeautifulSoup(search_response.content, "html.parser")
-    player_link = search_soup.find("div", {"class": "search-item-url"}).text
-    player_url = f"{base_url}{player_link}"
+keep_columns = [
+    "Player",
+    "GP",
+    "MIN",
+    "FGM",
+    "FGA",
+    "FG3M",
+    "FG3A",
+    "FTM",
+    "FTA",
+    "OREB",
+    "DREB",
+    "REB",
+    "AST",
+    "STL",
+    "BLK",
+    "TOV",
+    "PTS",
+]
 
-    player_response = requests.get(player_url)
-    player_soup = BeautifulSoup(player_response.content, "html.parser")
-    position = player_soup.find("span", {"itemprop": "position"}).text
-    return position
+metadata_columns = [
+    "Player",
+    "TEAM_ABBREVIATION",
+]
 
+tsv_data = data[keep_columns]
+metadata = data[metadata_columns]
 
-player_name = "LeBron James"
-player_position = get_player_position(player_name)
-print(f"{player_name}'s specific position is {player_position}")
+tsv_data.to_csv("computed_data/chaingingaling.csv", index=False)
+
+metadata.to_csv("computed_data/chaingingaling_metadata.csv", index=False)

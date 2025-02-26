@@ -84,12 +84,12 @@ export default function Predictions() {
             <button>Apply</button>
           </div>
         </div>
-        <div className="stat-block">
+        <div className="stat-block" style={{display: "flex", flexDirection: "column", gap: "7px"}}>
           <strong>About</strong>
           <div>Yap yap yap aoeir aergaoi oijea go aoiegroa iegoaeigr oaierjg</div>
-          <button>Read More</button>
-          <button>Compare Players</button>
-          <button>Your League</button>
+          <button className="about-button">Read More</button>
+          <button className="about-button">Compare Players</button>
+          <button className="about-button">Your League</button>
         </div>
       </div>
       <div>
