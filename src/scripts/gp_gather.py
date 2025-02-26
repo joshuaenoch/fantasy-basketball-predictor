@@ -31,5 +31,6 @@ for index, row in data.iterrows():
 full_data = data.iloc[:, 12:23].copy()
 full_data["Age"] = ages
 full_data["Draft Year"] = draft_years
+full_data["full_name"] = data["full_name"]
 
 full_data.to_csv("outputs/gp_data.csv", index=False)
