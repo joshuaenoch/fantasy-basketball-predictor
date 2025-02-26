@@ -47,6 +47,8 @@ y_pred = np.round(y_pred)
 
 data["Predicted_GP"] = y_pred
 
+print(data)
+
 
 print("Mean Absolute Error:", mean_absolute_error(y_test, y_pred))
 print("Mean Squared Error:", mean_squared_error(y_test, y_pred))

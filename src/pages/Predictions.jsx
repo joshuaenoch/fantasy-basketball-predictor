@@ -21,6 +21,10 @@ export default function Predictions() {
   const [customRuleset, setCustomRuleset] = useState(standardRuleset);
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState(data);
+  const [showModel1, setShowModel1] = useState(true);
+  const [showModel2, setShowModel2] = useState(true);
+  const [showStats, setShowStats] = useState(true);
+
 
   useEffect(() => {
     fetch('/src/scripts/outputs/full_data.csv')
@@ -86,38 +90,44 @@ export default function Predictions() {
         </div>
         <div className="stat-block" style={{display: "flex", flexDirection: "column", gap: "7px"}}>
           <strong>About</strong>
-          <div>Yap yap yap aoeir aergaoi oijea go aoiegroa iegoaeigr oaierjg</div>
-          <button className="about-button">Read More</button>
-          <button className="about-button">Compare Players</button>
-          <button className="about-button">Your League</button>
+          <div>The accuracy stats of the models are as follows: (insert them here)</div>
+          <button className="about-button" onClick={() => window.location.href = "/"}>Read More</button>
+          <button className="about-button" onClick={() => window.location.href = "/compare"}>Compare Players</button>
+          <button className="about-button" onClick={() => window.location.href = "/league"}>Your League</button>
         </div>
       </div>
       <div>
       </div>
       <div className="table-container" style={{overflowX: "auto", width: "100%"}}>
         <div style={{display: "flex", gap: "15px"}}>
-          <div>
-            <label for="model1" style={{marginRight: "5px"}}>Model 1</label>
-            <input type="checkbox" id="model1" name="model1" value="model1" />
-          </div>
-          <div>
-            <label for="model1" style={{marginRight: "5px"}}>Model 2</label>
-            <input type="checkbox" id="model2" name="model2" value="model2" />
-          </div>
-          <div>
-            <label for="fullstats" style={{marginRight: "5px"}}>Full Stats</label>
-            <input type="checkbox" id="fullstats" name="fullstats" value="fullstats" />
-          </div>
           <input type="text" placeholder="Search for player" value={search} onChange={(e) => setSearch(e.target.value)}/>
+          <div>
+            <label htmlFor="model1" style={{marginRight: "5px"}}>Model 1</label>
+            <input type="checkbox" id="model1" name="model1" value="model1" checked={showModel1} onChange={() => setShowModel1(!showModel1)}/>
+          </div>
+          <div>
+            <label htmlFor="model2" style={{marginRight: "5px"}}>Model 2</label>
+            <input type="checkbox" id="model2" name="model2" value="model2" checked={showModel2} onChange={() => setShowModel2(!showModel2)}/>
+          </div>
+          <div>
+            <label htmlFor="fullstats" style={{marginRight: "5px"}}>Full Stats</label>
+            <input type="checkbox" id="fullstats" name="fullstats" value="fullstats" checked={showStats} onChange={() => setShowStats(!showStats)}/>
+          </div>
         </div>
         <table>
           <thead>
             <tr>
               <th colspan="1"></th>
               <th colspan="4">Status</th>
-              <th colspan="1">Model 1 Predictions</th>
-              <th colspan="1">Model 2 Predictions</th>
-              <th colspan="13">Full Statistics</th>
+              {showModel1 &&
+                <th colspan="1">Model 1 Predictions</th>
+              }
+              {showModel2 &&
+                <th colspan="1">Model 2 Predictions</th>
+              }
+              {showStats &&
+                <th colspan="13">Full Statistics</th>
+              }
             </tr>
             <tr>
               <th onClick = {() => setSorted(0)} className={sorted === 0 ? "sorted" : ""}>Name</th>
@@ -126,23 +136,29 @@ export default function Predictions() {
               <th onClick = {() => setSorted(7)} className={sorted === 7 ? "sorted" : ""}>Games Played</th>
               <th onClick = {() => setSorted(8)} className={sorted === 8 ? "sorted" : ""}>Games Started</th>
 
-              <th onClick = {() => setSorted(29)} className={sorted === 29 ? "sorted" : ""}>Final FPPG</th>
-              <th onClick = {() => setSorted(30)} className={sorted === 30 ? "sorted" : ""}>Final FPPG</th>
-
-
-              <th onClick = {() => setSorted(27)} className={sorted === 27 ? "sorted" : ""}>PPG</th>
-              <th onClick = {() => setSorted(9)} className={sorted === 9 ? "sorted" : ""}>MPG</th>
-              <th onClick = {() => setSorted(10)} className={sorted === 10 ? "sorted" : ""}>FGM</th>
-              <th onClick = {() => setSorted(11)} className={sorted === 11 ? "sorted" : ""}>FGA</th>
-              <th onClick = {() => setSorted(13)} className={sorted === 13 ? "sorted" : ""}>3PM</th>
-              <th onClick = {() => setSorted(14)} className={sorted === 14 ? "sorted" : ""}>3PA</th>
-              <th onClick = {() => setSorted(16)} className={sorted === 16 ? "sorted" : ""}>FTM</th>
-              <th onClick = {() => setSorted(17)} className={sorted === 17 ? "sorted" : ""}>FTA</th>
-              <th onClick = {() => setSorted(21)} className={sorted === 21 ? "sorted" : ""}>REB</th>
-              <th onClick = {() => setSorted(22)} className={sorted === 22 ? "sorted" : ""}>AST</th>
-              <th onClick = {() => setSorted(23)} className={sorted === 23 ? "sorted" : ""}>STL</th>
-              <th onClick = {() => setSorted(24)} className={sorted === 24 ? "sorted" : ""}>BLK</th>
-              <th onClick = {() => setSorted(25)} className={sorted === 25 ? "sorted" : ""}>TOV</th>
+              {showModel1 &&
+                <th onClick = {() => setSorted(29)} className={sorted === 29 ? "sorted" : ""}>Final FPPG</th>
+              }
+              {showModel2 &&
+                <th onClick = {() => setSorted(30)} className={sorted === 30 ? "sorted" : ""}>Final FPPG</th>
+              }
+              {showStats &&
+              <>
+                <th onClick = {() => setSorted(27)} className={sorted === 27 ? "sorted" : ""}>PPG</th>
+                <th onClick = {() => setSorted(9)} className={sorted === 9 ? "sorted" : ""}>MPG</th>
+                <th onClick = {() => setSorted(10)} className={sorted === 10 ? "sorted" : ""}>FGM</th>
+                <th onClick = {() => setSorted(11)} className={sorted === 11 ? "sorted" : ""}>FGA</th>
+                <th onClick = {() => setSorted(13)} className={sorted === 13 ? "sorted" : ""}>3PM</th>
+                <th onClick = {() => setSorted(14)} className={sorted === 14 ? "sorted" : ""}>3PA</th>
+                <th onClick = {() => setSorted(16)} className={sorted === 16 ? "sorted" : ""}>FTM</th>
+                <th onClick = {() => setSorted(17)} className={sorted === 17 ? "sorted" : ""}>FTA</th>
+                <th onClick = {() => setSorted(21)} className={sorted === 21 ? "sorted" : ""}>REB</th>
+                <th onClick = {() => setSorted(22)} className={sorted === 22 ? "sorted" : ""}>AST</th>
+                <th onClick = {() => setSorted(23)} className={sorted === 23 ? "sorted" : ""}>STL</th>
+                <th onClick = {() => setSorted(24)} className={sorted === 24 ? "sorted" : ""}>BLK</th>
+                <th onClick = {() => setSorted(25)} className={sorted === 25 ? "sorted" : ""}>TOV</th>
+              </>
+              }
             </tr>
           </thead>
           <tbody>
@@ -154,22 +170,31 @@ export default function Predictions() {
                 <td className={sorted === 7 ? "sorted" : ""}>{row[7]}</td>
                 <td className={sorted === 8 ? "sorted" : ""}>{row[8]}</td>
 
-                <td className={sorted === 29 ? "sorted" : ""}>{row[29]}</td>
-                <td className={sorted === 30 ? "sorted" : ""}>{row[30]}</td>
+                {showModel1 &&
+                  <td className={sorted === 29 ? "sorted" : ""}>{row[29]}</td>
+                }
 
-                <td className={sorted === 27 ? "sorted" : ""}>{row[27]}</td>
-                <td className={sorted === 9 ? "sorted" : ""}>{row[9]}</td>
-                <td className={sorted === 10 ? "sorted" : ""}>{row[10]}</td>
-                <td className={sorted === 11 ? "sorted" : ""}>{row[11]}</td>
-                <td className={sorted === 13 ? "sorted" : ""}>{row[13]}</td>
-                <td className={sorted === 14 ? "sorted" : ""}>{row[14]}</td>
-                <td className={sorted === 16 ? "sorted" : ""}>{row[16]}</td>
-                <td className={sorted === 17 ? "sorted" : ""}>{row[17]}</td>
-                <td className={sorted === 21 ? "sorted" : ""}>{row[21]}</td>
-                <td className={sorted === 22 ? "sorted" : ""}>{row[22]}</td>
-                <td className={sorted === 23 ? "sorted" : ""}>{row[23]}</td>
-                <td className={sorted === 24 ? "sorted" : ""}>{row[24]}</td>
-                <td className={sorted === 25 ? "sorted" : ""}>{row[25]}</td>
+                {showModel2 &&
+                  <td className={sorted === 30 ? "sorted" : ""}>{row[30]}</td>
+                }
+
+                {showStats &&
+                  <>
+                  <td className={sorted === 27 ? "sorted" : ""}>{row[27]}</td>
+                  <td className={sorted === 9 ? "sorted" : ""}>{row[9]}</td>
+                  <td className={sorted === 10 ? "sorted" : ""}>{row[10]}</td>
+                  <td className={sorted === 11 ? "sorted" : ""}>{row[11]}</td>
+                  <td className={sorted === 13 ? "sorted" : ""}>{row[13]}</td>
+                  <td className={sorted === 14 ? "sorted" : ""}>{row[14]}</td>
+                  <td className={sorted === 16 ? "sorted" : ""}>{row[16]}</td>
+                  <td className={sorted === 17 ? "sorted" : ""}>{row[17]}</td>
+                  <td className={sorted === 21 ? "sorted" : ""}>{row[21]}</td>
+                  <td className={sorted === 22 ? "sorted" : ""}>{row[22]}</td>
+                  <td className={sorted === 23 ? "sorted" : ""}>{row[23]}</td>
+                  <td className={sorted === 24 ? "sorted" : ""}>{row[24]}</td>
+                  <td className={sorted === 25 ? "sorted" : ""}>{row[25]}</td>
+                  </>
+                }
               </tr>
             ))}
           </tbody>

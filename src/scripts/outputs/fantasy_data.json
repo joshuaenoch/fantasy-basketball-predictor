@@ -1,0 +1,92 @@
+{
+    "team_name": "Joshua's Team",
+    "wins": 8,
+    "losses": 2,
+    "standing": 3,
+    "roster": [
+        {
+            "name": "Giannis Antetokounmpo",
+            "position": "PF",
+            "avg_points": 56.04,
+            "injured": false
+        },
+        {
+            "name": "De'Aaron Fox",
+            "position": "PG",
+            "avg_points": 43.87,
+            "injured": false
+        },
+        {
+            "name": "Cade Cunningham",
+            "position": "PG",
+            "avg_points": 49.11,
+            "injured": false
+        },
+        {
+            "name": "Jalen Williams",
+            "position": "PF",
+            "avg_points": 42.17,
+            "injured": false
+        },
+        {
+            "name": "Zach LaVine",
+            "position": "SG",
+            "avg_points": 38.88,
+            "injured": false
+        },
+        {
+            "name": "Jakob Poeltl",
+            "position": "C",
+            "avg_points": 37.22,
+            "injured": true
+        },
+        {
+            "name": "Tyler Herro",
+            "position": "SG",
+            "avg_points": 40.67,
+            "injured": false
+        },
+        {
+            "name": "Bam Adebayo",
+            "position": "C",
+            "avg_points": 37.94,
+            "injured": false
+        },
+        {
+            "name": "John Collins",
+            "position": "PF",
+            "avg_points": 35.05,
+            "injured": true
+        },
+        {
+            "name": "Miles Bridges",
+            "position": "SF",
+            "avg_points": 35.7,
+            "injured": false
+        },
+        {
+            "name": "Brandon Ingram",
+            "position": "SF",
+            "avg_points": 37.11,
+            "injured": true
+        },
+        {
+            "name": "Cameron Johnson",
+            "position": "SF",
+            "avg_points": 33.26,
+            "injured": false
+        },
+        {
+            "name": "Chris Paul",
+            "position": "PG",
+            "avg_points": 32.48,
+            "injured": false
+        },
+        {
+            "name": "Myles Turner",
+            "position": "C",
+            "avg_points": 32.82,
+            "injured": false
+        }
+    ]
+}

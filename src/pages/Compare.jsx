@@ -28,6 +28,8 @@ export default function Compare() {
       });
       setMaxStats(maxStats);
       console.log(maxStats);
+    } else {
+      setMaxStats({FPPG: -10, PPG: -1, AST: -1, REB: -1});
     }
   }, [comparingPlayers]);
 
@@ -46,8 +48,8 @@ export default function Compare() {
   }
 
   return (
-    <div style={{display: "flex", gap: "20px"}}>
-      <div className="player_list">
+    <div style={{display: "flex", gap: "20px", margin: "20px"}}>
+      <div className="player_list" style={{display: "flex", flexDirection: "column", gap: "10px"}}>
         {data.map((player, index) => (
           <div key={index} onClick={() => addPlayer(player)}>
             <p>{player[0]}</p>

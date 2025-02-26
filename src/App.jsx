@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Predictions from "./pages/Predictions";
 import Compare from "./pages/Compare";
 import Navbar from "./components/Navbar"
+import League from "./pages/League";
 
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Predictions />} />
         <Route path="/compare" element={<Compare />} />
+        <Route path="/league" element={<League />} />
       </Routes>
     </BrowserRouter>
   );
