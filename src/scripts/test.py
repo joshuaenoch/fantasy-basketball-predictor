@@ -1,35 +1,25 @@
+from nba_api.stats.static import players
+from nba_api.stats.endpoints import playercareerstats
 import pandas as pd
+from nba_api.stats.endpoints import commonplayerinfo
 
-data = pd.read_csv("computed_data/chainging.csv")
+data = pd.read_csv("outputs/gp_data.csv")
+data2 = pd.read_csv("outputs/fppg_py.csv")
 
-keep_columns = [
-    "Player",
-    "GP",
-    "MIN",
-    "FGM",
-    "FGA",
-    "FG3M",
-    "FG3A",
-    "FTM",
-    "FTA",
-    "OREB",
-    "DREB",
-    "REB",
-    "AST",
-    "STL",
-    "BLK",
-    "TOV",
-    "PTS",
-]
+names = data2["full_name"].values
+data["full_name"] = names
 
-metadata_columns = [
-    "Player",
-    "TEAM_ABBREVIATION",
-]
+print(data)
 
-tsv_data = data[keep_columns]
-metadata = data[metadata_columns]
+data.to_csv("outputs/gp_data.csv", index=False)
 
-tsv_data.to_csv("computed_data/chaingingaling.csv", index=False)
+# players = players.get_active_players()
 
-metadata.to_csv("computed_data/chaingingaling_metadata.csv", index=False)
+# specific_player = [
+#     player for player in players if player["full_name"] == "Dillon Brooks"
+# ][0]
+
+# career = playercareerstats.PlayerCareerStats(
+#     player_id=specific_player["id"]
+# ).get_data_frames()[0]
+# print(career)
