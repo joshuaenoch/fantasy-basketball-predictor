@@ -1,11 +1,10 @@
 :root {
-  --dark: #1a1a1a;
-  --dark-medium: #545454;
-  --medium: #757475;
-  --medium-light: #edeef0;
-  --light: #f6f6f6;
-  --dark-color: #153e97;
-  --light-color: #3759a1;
+  --dark: #6c1c04;
+  --dark-medium: #914e37;
+  --medium: #b37e6b;
+  --medium-light: #eac8bc;
+  --light: #f5e8e3;
+  --light2: #eae3de;
 }
 
 * {
@@ -13,7 +12,7 @@
 }
 
 body {
-  background-color: var(--medium-light);
+  background-color: var(--light2);
 
 }
 
@@ -113,10 +112,10 @@ input[type="text"] {
 }
 
 tr:nth-child(even) {
-  background-color: var(--medium-light);
+  background-color: var(--light);
 }
 
 td:first-child:nth-child(even) {
-  background-color: var(--medium-light)
+  background-color: var(--light)
 }
 

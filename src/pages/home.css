@@ -1,0 +1,47 @@
+:root {
+  --dark: #6c1c04;
+  --dark-medium: #914e37;
+  --medium: #b37e6b;
+  --medium-light: #eac8bc;
+  --light: #f5e8e3;
+  --light2: #eae3de;
+}
+
+.home-container {
+  margin: 0 50px;
+}
+
+.header {
+  text-align: center;
+  background-color: var(--medium);
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  margin: 30px 0 30px 0;
+}
+
+.home-box {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.fantasy-box {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  padding: auto 5%;
+  gap: 10%;
+  width: 60%;
+}
+
+.about-box {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 30px;
+}

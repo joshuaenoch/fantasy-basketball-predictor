@@ -4,6 +4,7 @@ import Predictions from "./pages/Predictions";
 import Compare from "./pages/Compare";
 import Navbar from "./components/Navbar"
 import League from "./pages/League";
+import Home from "./pages/Home";
 
 
 export default function App() {
@@ -12,7 +13,8 @@ export default function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Predictions />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/stats" element={<Predictions />} />
         <Route path="/compare" element={<Compare />} />
         <Route path="/league" element={<League />} />
       </Routes>

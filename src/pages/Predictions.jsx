@@ -120,10 +120,10 @@ export default function Predictions() {
               <th colspan="1"></th>
               <th colspan="4">Status</th>
               {showModel1 &&
-                <th colspan="1">Model 1 Predictions</th>
+                <th colspan="2">Model 1 Predictions</th>
               }
               {showModel2 &&
-                <th colspan="1">Model 2 Predictions</th>
+                <th colspan="2">Model 2 Predictions</th>
               }
               {showStats &&
                 <th colspan="13">Full Statistics</th>
@@ -137,10 +137,17 @@ export default function Predictions() {
               <th onClick = {() => setSorted(8)} className={sorted === 8 ? "sorted" : ""}>Games Started</th>
 
               {showModel1 &&
-                <th onClick = {() => setSorted(29)} className={sorted === 29 ? "sorted" : ""}>Final FPPG</th>
+                <>
+                  <th onClick = {() => setSorted(29)} className={sorted === 29 ? "sorted" : ""}>Final FPPG</th>
+                  <th onClick = {() => setSorted(31)} className={sorted === 31 ? "sorted" : ""}>Final GP</th>
+                </>
+
               }
               {showModel2 &&
-                <th onClick = {() => setSorted(30)} className={sorted === 30 ? "sorted" : ""}>Final FPPG</th>
+                <>
+                  <th onClick = {() => setSorted(30)} className={sorted === 30 ? "sorted" : ""}>Final FPPG</th>
+                  <th onClick = {() => setSorted(32)} className={sorted === 32 ? "sorted" : ""}>Final GP</th>
+                </>
               }
               {showStats &&
               <>
@@ -171,11 +178,17 @@ export default function Predictions() {
                 <td className={sorted === 8 ? "sorted" : ""}>{row[8]}</td>
 
                 {showModel1 &&
-                  <td className={sorted === 29 ? "sorted" : ""}>{row[29]}</td>
+                  <>
+                    <td className={sorted === 29 ? "sorted" : ""}>{row[29]}</td>
+                    <td className={sorted === 31 ? "sorted" : ""}>{row[31]}</td>
+                  </>
                 }
 
                 {showModel2 &&
-                  <td className={sorted === 30 ? "sorted" : ""}>{row[30]}</td>
+                  <>
+                    <td className={sorted === 30 ? "sorted" : ""}>{row[30]}</td>
+                    <td className={sorted === 32 ? "sorted" : ""}>{row[32]}</td>
+                  </>
                 }
 
                 {showStats &&

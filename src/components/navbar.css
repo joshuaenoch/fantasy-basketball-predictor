@@ -1,9 +1,9 @@
 :root {
-  --dark: #1a1a1a;
-  --dark-medium: #3c3c3c;
-  --medium: #757475;
-  --medium-light: #edeef0;
-  --light: #f6f6f6;
+  --dark: #6c1c04;
+  --dark-medium: #914e37;
+  --medium: #b37e6b;
+  --medium-light: #eac8bc;
+  --light: #f5e8e3;
 }
 
 * {
