@@ -29,7 +29,7 @@
 
 .fantasy-box {
   background-color: white;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   justify-content: center;
   text-align: center;
@@ -37,11 +37,82 @@
   padding: auto 5%;
   gap: 10%;
   width: 60%;
+  align-items: center;
 }
 
 .about-box {
   background-color: white;
-  padding: 10px;
+  padding: 20px 5%;
   border-radius: 10px;
   margin-top: 30px;
+  line-height: 25px;
+}
+
+.fantasy-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.fantasy-form input {
+  width: 100%;
+}
+
+.home-container button {
+  background-color: var(--medium);
+  color: white;
+  padding: 5px 0;
+  width: 100px;
+}
+
+.top-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.top-questions * {
+  display: flex;
+  flex-direction: column;
+  gap:5px;
+  align-items: center;
+}
+
+.top-performers {
+  font-style: italic;
+  color: rgb(114, 114, 114);
+  margin-bottom: 2px;
+}
+
+h4 {
+  margin: 5px 0;
+}
+
+.home-example {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.home-example div {
+  background-color:var(--medium);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  width: 135px;
+  margin: 10px auto;
+}
+
+.home-example img {
+  width: 25%;
+}
+
+.info-boxes {
+  display: flex;
+  gap: 30px;
+}
+
+@media (min-width: 1370px) {
+  .howto {
+    display: flex;
+    gap: 3%;
+  }
 }

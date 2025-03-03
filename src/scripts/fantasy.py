@@ -19,6 +19,7 @@ team_data = {
     "losses": my_team.losses,
     "standing": my_team.standing,
     "roster": [],
+    "free_agents": [],
 }
 
 # Populate the roster data
@@ -32,6 +33,22 @@ for player in roster:
         "injured": player.injured,
     }
     team_data["roster"].append(player_data)
+
+free_agents = league.free_agents()
+
+free_agent_data = []
+for player in free_agents:
+    player_data = {
+        "name": player.name,
+        "position": player.position,
+        "avg_points": player.avg_points,
+        "injured": player.injured,
+    }
+    free_agent_data.append(player_data)
+
+free_agent_data.sort(key=lambda x: x["avg_points"], reverse=True)
+
+team_data["free_agents"] = free_agent_data
 
 team_json = json.dumps(team_data, indent=4)
 
