@@ -7,7 +7,6 @@ export default function Navbar() {
     <div className="navbar">
       <Link to="/">Home</Link>
       <Link to="/stats">Statistics</Link>
-      <Link to ="/compare">Compare Players</Link>
       <Link to="/league">Your League</Link>
     </div>
   )

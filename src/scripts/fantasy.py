@@ -2,14 +2,14 @@ import logging
 import json
 from espn_api.basketball import League
 
-league = League(league_id=2073613821, year=2025)
+league = League(league_id=187113096, year=2025)
 
 teams = league.teams
 
 my_team = "not found"
 
 for team in teams:
-    if team.team_id == 4:
+    if team.team_id == 2:
         my_team = team
 
 # Create a dictionary for the team data
@@ -20,6 +20,7 @@ team_data = {
     "standing": my_team.standing,
     "roster": [],
     "free_agents": [],
+    "top_agents": [],
 }
 
 # Populate the roster data
@@ -30,6 +31,7 @@ for player in roster:
         "name": player.name,
         "position": player.position,
         "avg_points": player.avg_points,
+        "avg_points_7": player.stats["2025_last_7"]["applied_avg"],
         "injured": player.injured,
     }
     team_data["roster"].append(player_data)
@@ -49,6 +51,21 @@ for player in free_agents:
 free_agent_data.sort(key=lambda x: x["avg_points"], reverse=True)
 
 team_data["free_agents"] = free_agent_data
+
+agent_scores = []
+
+for agent in free_agents:
+    agent_score = {}
+    stats = agent.stats
+    agent_score["name"] = agent.name
+    agent_score["score"] = stats["2025_last_7"]["applied_total"]
+    agent_score["average"] = stats["2025_last_7"]["applied_avg"]
+    agent_scores.append(agent_score)
+
+agent_scores.sort(key=lambda x: x["score"], reverse=True)
+agent_scores = agent_scores[:10]
+
+team_data["top_agents"] = agent_scores
 
 team_json = json.dumps(team_data, indent=4)
 

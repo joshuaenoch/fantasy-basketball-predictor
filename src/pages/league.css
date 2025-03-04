@@ -1,0 +1,26 @@
+:root {
+  --dark: #6c1c04;
+  --dark-medium: #914e37;
+  --medium: #b37e6b;
+  --medium-light: #eac8bc;
+  --light: #f5e8e3;
+  --light2: #eae3de;
+}
+
+.league-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.league-header {
+  font-weight:600;
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: var(--dark);
+}
+
+hr {
+  border: 1px solid lightgrey;
+  margin: 15px 0;
+}
