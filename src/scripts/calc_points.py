@@ -3,7 +3,7 @@ from nba_api.stats.endpoints import playergamelog
 import pandas as pd
 from datetime import datetime, timedelta
 
-player_stats = pd.read_csv("stats.csv")
+player_stats = pd.read_csv("season_data/2024-2025.csv")
 
 stats_weight = {
     "points": 1,
@@ -34,10 +34,12 @@ for index, row in player_stats.iterrows():
         + row["TOV"] * stats_weight["turnovers"]
         + row["PTS"] * stats_weight["points"]
     )
-    player = []
-    player.append(row["Player_Name"])
-    player.append(points)
-    all_points.append(player)
+    all_points.append(points)
 
-all_points = pd.DataFrame(all_points, columns=["Player_Name", "Points"])
-all_points.to_csv("points.csv", index=False)
+player_stats["FPPG"] = all_points
+
+player_stats = player_stats.round(2)
+
+player_stats.rename(columns={"Player_Name": "Player"}, inplace=True)
+
+player_stats.to_csv("computed_data/new-2024-2025.csv", index=False)

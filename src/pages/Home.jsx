@@ -4,6 +4,8 @@ import './home.css'
 export default function Home() {
   const [data, setData] = useState([]);
   const [example, setExample] = useState([false, false])
+  const [leagueId, setLeagueId] = useState('');
+  const [teamId, setTeamId] = useState('');
 
   useEffect(() => {
     fetch('/src/scripts/outputs/full_data.csv')
@@ -36,7 +38,21 @@ export default function Home() {
     setExample(newExample);
   }
 
-  console.log("i am here tho")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch('http://localhost:5000/run-script', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ leagueId, teamId }),
+    });
+
+    const result = await response.json();
+    console.log(result);
+  };
+
   return (
     <div className="home-container">
       <div className="header">
@@ -46,11 +62,21 @@ export default function Home() {
         <div className="fantasy-box">
           <div className="home-espn-league">
             <div style={{marginBottom: "10px"}}>Have an ESPN league?</div>
-            <div className="fantasy-form">
-              <input type="text" placeholder="League ID" />
-              <input type="text" placeholder="Team ID" />
-              <button>Submit</button>
-            </div>
+            <form className="fantasy-form" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                value={leagueId}
+                onChange={(e) => setLeagueId(e.target.value)}
+                placeholder="League ID"
+              />
+              <input
+                type="text"
+                value={teamId}
+                onChange={(e) => setTeamId(e.target.value)}
+                placeholder="Team ID"
+              />
+              <button type="submit">Submit</button>
+            </form>
           </div>
           <div className="top-questions">
             <div>
