@@ -157,19 +157,42 @@ export default function FantasyData() {
           </div>
           <div style={{display: 'flex', flexDirection: 'column', width: "50%"}}>
             <div className="comparison-box">
-              {comparingPlayers.map((player, index) => (
-                <div key={index}>
-                  <p>{player[0]}</p>
-                  <p style={{color: parseFloat(player[28]) === maxStats["FPPG"] ? "green" : "inherit"}}>FPPG: {player[28]}</p>
-                  <p style={{color: parseFloat(player[7]) === maxStats["GP"] ? "green" : "inherit"}}>GP: {player[7]}</p>
-                  <p style={{ color: parseFloat(player[27]) === maxStats["PPG"] ? "green" : "inherit" }}>
-                    PPG: {player[27]}
-                  </p>
-                  <p style={{color: parseFloat(player[22]) === maxStats["AST"] ? "green" : "inherit"}}>AST: {player[22]}</p>
-                  <p style={{color: parseFloat(player[21]) === maxStats["REB"] ? "green" : "inherit"}}>REB: {player[21]}</p>
-                  <p onClick={() => setComparingPlayers(comparingPlayers.filter((p, i) => i !== index))}>Remove</p>
-                </div>
-              ))}
+              {comparingPlayers.length > 0 ? (
+                comparingPlayers.map((player, index) => (
+                  <div key={index}>
+                    <p>{player[0]}</p>
+                    <p style={{color: parseFloat(player[28]) === maxStats["FPPG"] ? "green" : "inherit"}}>
+                      FPPG: {player[28]}
+                    </p>
+                    <p style={{color: parseFloat(player[7]) === maxStats["GP"] ? "green" : "inherit"}}>
+                      GP: {player[7]}
+                    </p>
+                    <p style={{color: parseFloat(player[27]) === maxStats["PPG"] ? "green" : "inherit"}}>
+                      PPG: {player[27]}
+                    </p>
+                    <p style={{color: parseFloat(player[22]) === maxStats["AST"] ? "green" : "inherit"}}>
+                      AST: {player[22]}
+                    </p>
+                    <p style={{color: parseFloat(player[21]) === maxStats["REB"] ? "green" : "inherit"}}>
+                      REB: {player[21]}
+                    </p>
+                    <p style={{color: parseFloat(player[23]) === maxStats["STL"] ? "green" : "inherit"}}>
+                      STL: {player[23]}
+                    </p>
+                    <p style={{color: parseFloat(player[24]) === maxStats["BLK"] ? "green" : "inherit"}}>
+                      BLK: {player[24]}
+                    </p>
+                    <p style={{color: parseFloat(player[25]) === maxStats["TOV"] ? "red" : "inherit"}}>
+                      TOV: {player[25]}
+                    </p>
+                    <p onClick={() => setComparingPlayers(comparingPlayers.filter((p, i) => i !== index))}>
+                      Remove
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <div>Click on player's names to begin comparing them</div>
+              )}
             </div>
           </div>
           <div style={{display: 'flex', flexDirection: 'column', gap: '20px', width: "18%"}}>
