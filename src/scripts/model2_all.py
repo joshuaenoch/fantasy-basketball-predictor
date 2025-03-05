@@ -65,8 +65,8 @@ for player, series in players_series.items():
 predictions_df = pd.DataFrame(
     list(predictions.items()), columns=["Player", "Predicted_FPPG"]
 )
-for player, prediction in predictions.items():
-    predictions_df.to_csv("outputs/model2_predictions.csv", index=False)
+# for player, prediction in predictions.items():
+#     predictions_df.to_csv("outputs/model2_predictions.csv", index=False)
 
 # Testing
 from sklearn.metrics import (

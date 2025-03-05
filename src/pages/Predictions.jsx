@@ -89,7 +89,7 @@ export default function Predictions() {
         <div className="stat-block">
           <select name="ruleset" id="ruleset" onChange={(e) => setIsStandard(e.target.value === "standard")}>
             <option value="standard">Standard Ruleset</option>
-            <option value="custom">Custom Ruleset</option>
+            {/* <option value="custom">Custom Ruleset</option> */}
           </select>
           <div>
             {Object.entries(customRuleset).map(([key, value]) => (
@@ -103,7 +103,7 @@ export default function Predictions() {
               </div>
               )
             ))}
-            <button>Apply</button>
+            {/* <button>Apply</button> */}
           </div>
         </div>
         <div className="stat-block" style={{display: "flex", flexDirection: "column", gap: "7px"}}>
@@ -138,10 +138,10 @@ export default function Predictions() {
               <th colspan="1"></th>
               <th colspan="4">Status</th>
               {showModel1 &&
-                <th colspan="2">Model 1 Predictions</th>
+                <th colspan="1">Model 1 Predictions</th>
               }
               {showModel2 &&
-                <th colspan="2">Model 2 Predictions</th>
+                <th colspan="1">Model 2 Predictions</th>
               }
               {showStats &&
                 <th colspan="13">Full Statistics</th>
@@ -157,14 +157,14 @@ export default function Predictions() {
               {showModel1 &&
                 <>
                   <th onClick = {() => setSorted(29)} className={sorted === 29 ? "sorted" : ""}>Final FPPG</th>
-                  <th onClick = {() => setSorted(31)} className={sorted === 31 ? "sorted" : ""}>Final GP</th>
+                  {/* <th onClick = {() => setSorted(31)} className={sorted === 31 ? "sorted" : ""}>Final GP</th> */}
                 </>
 
               }
               {showModel2 &&
                 <>
                   <th onClick = {() => setSorted(30)} className={sorted === 30 ? "sorted" : ""}>Final FPPG</th>
-                  <th onClick = {() => setSorted(32)} className={sorted === 32 ? "sorted" : ""}>Final GP</th>
+                  {/* <th onClick = {() => setSorted(32)} className={sorted === 32 ? "sorted" : ""}>Final GP</th> */}
                 </>
               }
               {showStats &&
@@ -203,14 +203,14 @@ export default function Predictions() {
                 {showModel1 &&
                   <>
                     <td className={sorted === 29 ? "sorted" : ""}>{row[29]}</td>
-                    <td className={sorted === 31 ? "sorted" : ""}>{row[31]}</td>
+                    {/* <td className={sorted === 31 ? "sorted" : ""}>{row[31]}</td> */}
                   </>
                 }
 
                 {showModel2 &&
                   <>
                     <td className={sorted === 30 ? "sorted" : ""}>{row[30]}</td>
-                    <td className={sorted === 32 ? "sorted" : ""}>{row[32]}</td>
+                    {/* <td className={sorted === 32 ? "sorted" : ""}>{row[32]}</td> */}
                   </>
                 }
 

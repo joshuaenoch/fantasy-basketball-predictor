@@ -59,6 +59,15 @@ export default function Home() {
         This is my tool for ESPN H2H fantasy basketball. To get started, check out below.
       </div>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <div className="home-box" style={{width: "30%"}}>
+          <div style={{marginBottom: "10px"}}>Top performers</div>
+          {getTop5Players().map((player, index) => (
+            <div key={index} className="top-performers">
+              {player.name} - {player.fppg}
+            </div>
+          ))}
+          <button style={{marginTop: "10px", width: "150px"}} onClick ={() => window.location.href = '/stats'}>See Full Statistics</button>
+        </div>
         <div className="fantasy-box">
           <div className="home-espn-league">
             <div style={{marginBottom: "10px"}}>Have an ESPN league?</div>
@@ -75,7 +84,7 @@ export default function Home() {
                 onChange={(e) => setTeamId(e.target.value)}
                 placeholder="Team ID"
               />
-              <button type="submit">Submit</button>
+              <button type="submit" onClick={() => window.location.href = '/league'}>Submit</button>
             </form>
           </div>
           <div className="top-questions">
@@ -88,15 +97,6 @@ export default function Home() {
               <button onClick={() => document.querySelector('.howto').scrollIntoView({ behavior: 'smooth' })}>Read below</button>
             </div>
           </div>
-        </div>
-        <div className="home-box" style={{width: "30%"}}>
-          <div style={{marginBottom: "10px"}}>Top performers</div>
-          {getTop5Players().map((player, index) => (
-            <div key={index} className="top-performers">
-              {player.name} - {player.fppg}
-            </div>
-          ))}
-          <button style={{marginTop: "10px", width: "150px"}}>See Full Statistics</button>
         </div>
       </div>
       <div className="about-box">
