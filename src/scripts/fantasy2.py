@@ -5,16 +5,27 @@ import json
 
 league = League(league_id=2073613821, year=2025)
 
+all_players = []
+
 
 teams = league.teams
 
 my_team = "not found"
 
 for team in teams:
-    if team.team_id == 4:
-        my_team = team
+    for player in team.roster:
+        all_players.append(player)
 
-free_agents = league.free_agents()
+free_agents = league.free_agents(size=None)
+
+for player in free_agents:
+    all_players.append(player)
+
+print(len(all_players))
+
+print(all_players[0].injured)
+
+exit()
 
 agent_scores = []
 

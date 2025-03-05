@@ -24,10 +24,12 @@ export default function Predictions() {
   const [showModel1, setShowModel1] = useState(true);
   const [showModel2, setShowModel2] = useState(true);
   const [showStats, setShowStats] = useState(true);
+  const [injured, setInjured] = useState([])
 
 
   useEffect(() => {
-    fetch('/src/scripts/outputs/full_data.csv')
+    const fetchData = async () => {
+      fetch('/src/scripts/outputs/full_data.csv')
       .then(response => response.text())
       .then(result => {
         toArray(result);
@@ -35,6 +37,20 @@ export default function Predictions() {
       .catch(error => {
         console.error('Error getting data');
       });
+    }
+    const fetchInjured = async () => {
+      fetch('/src/scripts/outputs/injuries.json')
+      .then(response => response.text())
+      .then(result => {
+        setInjured(result);
+      })
+      .catch(error => {
+        console.error('Error getting injuerd data');
+      });
+    }
+
+    fetchData();
+    fetchInjured();
   }, []);
 
   useEffect(() => {
@@ -64,6 +80,8 @@ export default function Predictions() {
     newData = newData.map(row => row.split(','));
     setData(newData);
   }
+
+  console.log(injured)
 
   return (
     <div style={{display: "flex", padding: "40px"}}>
@@ -171,7 +189,12 @@ export default function Predictions() {
           <tbody>
             {filteredData.map((row, index) => (
               <tr key={index}>
-                <td className={sorted === 0 ? "sorted" : ""}>{row[0]}</td>
+                <td
+                  className={sorted === 0 ? "sorted" : ""}
+                  style={{
+                    color: injured.includes(row[0]) ? "red" : "inherit",
+                  }}
+                >{row[0]} {injured.includes(row[0]) && "(OUT)"}</td>
                 <td className={sorted === 5 ? "sorted" : ""}>{row[5]}</td>
                 <td className={sorted === 28 ? "sorted" : ""}>{row[28]}</td>
                 <td className={sorted === 7 ? "sorted" : ""}>{row[7]}</td>

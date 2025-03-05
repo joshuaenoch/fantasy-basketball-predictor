@@ -1,13 +1,30 @@
-from pypdf import PdfReader
+from espn_api.basketball import League
+import pandas as pd
+import json
 
-# creating a pdf reader object
-reader = PdfReader("season_data/example.pdf")
 
-# printing number of pages in pdf file
-print(len(reader.pages))
+league = League(league_id=2073613821, year=2025)
 
-# creating a page object
-page = reader.pages[0]
+all_players = []
 
-# extracting text from page
-print(page.extract_text())
+
+teams = league.teams
+
+my_team = "not found"
+
+for team in teams:
+    for player in team.roster:
+        all_players.append(player)
+
+free_agents = league.free_agents(size=None)
+
+for player in free_agents:
+    all_players.append(player)
+
+injured_players = []
+for player in all_players:
+    if player.injured:
+        injured_players.append(player.name)
+
+with open("outputs/injuries.json", "w") as f:
+    json.dump(injured_players, f)
