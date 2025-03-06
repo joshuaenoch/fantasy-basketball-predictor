@@ -82,6 +82,8 @@ export default function FantasyData() {
       let maxStats = {};
       comparingPlayers.forEach(player => {
         maxStats["FPPG"] = Math.max(maxStats["FPPG"] || 0, player[28]);
+        maxStats["FPPG7"] = Math.max(maxStats["FPPG7"] || 0, player[33]);
+        maxStats["FPPG30"] = Math.max(maxStats["FPPG30"] || 0, player[34]);
         maxStats["GP"] = Math.max(maxStats["GP"] || 0, player[7]);
         maxStats["PPG"] = Math.max(maxStats["PPG"] || 0, player[27]);
         maxStats["AST"] = Math.max(maxStats["AST"] || 0, player[22]);
@@ -92,7 +94,7 @@ export default function FantasyData() {
       });
       setMaxStats(maxStats);
     } else {
-      setMaxStats({FPPG: -10, GP: -1,PPG: -1, AST: -1, REB: -1, STL: -1, BLK: -1, TOV: -1});
+      setMaxStats({FPPG: -10, FPPG7: -10, FPPG30: -10, GP: -1,PPG: -1, AST: -1, REB: -1, STL: -1, BLK: -1, TOV: -1});
     }
 
     let newCompData = [...comparingData]
@@ -133,7 +135,7 @@ export default function FantasyData() {
       {data ? (
         <div style={{display: 'flex', justifyContent: 'space-between', width: "100%"}}>
           <div style={{display: 'flex', flexDirection: 'column', gap: '20px', width: "18%"}}>
-            <div className="league-box">
+            <div className="league-box" style={{height: "82vh", overflow: "scroll"}}>
               <div className="league-header">{data.team_name}</div>
               <div style={{color: data.standing<=4 ? 'green' : 'red'}}>{data.wins} W - {data.losses} L (Rank {data.standing}/10)</div>
               <hr />
@@ -161,9 +163,17 @@ export default function FantasyData() {
                 comparingPlayers.map((player, index) => (
                   <div key={index}>
                     <p>{player[0]}</p>
+                    <hr className="hr2" />
                     <p style={{color: parseFloat(player[28]) === maxStats["FPPG"] ? "green" : "inherit"}}>
                       FPPG: {player[28]}
                     </p>
+                    <p style={{color: parseFloat(player[33]) === maxStats["FPPG7"] ? "green" : "inherit"}}>
+                      7 Day FPPG: {player[33]}
+                    </p>
+                    <p style={{color: parseFloat(player[34]) === maxStats["FPPG30"] ? "green" : "inherit"}}>
+                      30 Day FPPG: {player[34]}
+                    </p>
+                    <hr className="hr2" />
                     <p style={{color: parseFloat(player[7]) === maxStats["GP"] ? "green" : "inherit"}}>
                       GP: {player[7]}
                     </p>
@@ -185,7 +195,7 @@ export default function FantasyData() {
                     <p style={{color: parseFloat(player[25]) === maxStats["TOV"] ? "red" : "inherit"}}>
                       TOV: {player[25]}
                     </p>
-                    <p onClick={() => setComparingPlayers(comparingPlayers.filter((p, i) => i !== index))}>
+                    <p style={{color: "grey"}} onClick={() => setComparingPlayers(comparingPlayers.filter((p, i) => i !== index))}>
                       Remove
                     </p>
                   </div>
@@ -196,7 +206,7 @@ export default function FantasyData() {
             </div>
           </div>
           <div style={{display: 'flex', flexDirection: 'column', gap: '20px', width: "18%"}}>
-            <div className='league-box' style={{height: "500px", overflow: "scroll"}}>
+            <div className='league-box' style={{height: "37vh", overflow: "scroll"}}>
                 <div className="league-header">Top 10 Free Agents</div>
                 <div>Based on games from the last 7 days</div>
                 <hr />
@@ -214,7 +224,7 @@ export default function FantasyData() {
                   ))}
                 </div>
             </div>
-            <div className='league-box'>
+            <div className='league-box' style={{height: "37vh", overflow: "scroll"}}>
               <div className="league-header">All Players</div>
               <div style={{display: "flex", flexDirection: "column", gap: "10px", margin:"10px 0"}}>
                 <div>

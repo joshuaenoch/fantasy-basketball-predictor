@@ -136,7 +136,7 @@ export default function Predictions() {
           <thead>
             <tr>
               <th colspan="1"></th>
-              <th colspan="4">Status</th>
+              <th colspan="6">Status</th>
               {showModel1 &&
                 <th colspan="1">Model 1 Predictions</th>
               }
@@ -151,6 +151,9 @@ export default function Predictions() {
               <th onClick = {() => setSorted(0)} className={sorted === 0 ? "sorted" : ""}>Name</th>
               <th onClick = {() => setSorted(5)} className={sorted === 5 ? "sorted" : ""}>Team</th>
               <th onClick = {() => setSorted(28)} className={sorted === 28 ? "sorted" : ""}> Current FPPG</th>
+              <th onClick = {() => setSorted(33)} className={sorted === 33 ? "sorted" : ""}> 7 Day FPPG</th>
+              <th onClick = {() => setSorted(34)} className={sorted === 34 ? "sorted" : ""}> 30 Day FPPG</th>
+
               <th onClick = {() => setSorted(7)} className={sorted === 7 ? "sorted" : ""}>Games Played</th>
               <th onClick = {() => setSorted(8)} className={sorted === 8 ? "sorted" : ""}>Games Started</th>
 
@@ -197,6 +200,8 @@ export default function Predictions() {
                 >{row[0]} {injured.includes(row[0]) && "(OUT)"}</td>
                 <td className={sorted === 5 ? "sorted" : ""}>{row[5]}</td>
                 <td className={sorted === 28 ? "sorted" : ""}>{row[28]}</td>
+                <td className={sorted === 33 ? "sorted" : ""}>{row[33]}</td>
+                <td className={sorted === 34 ? "sorted" : ""}>{row[34]}</td>
                 <td className={sorted === 7 ? "sorted" : ""}>{row[7]}</td>
                 <td className={sorted === 8 ? "sorted" : ""}>{row[8]}</td>
 

@@ -87,53 +87,45 @@ export default function Home() {
               <button type="submit" onClick={() => window.location.href = '/league'}>Submit</button>
             </form>
           </div>
-          <div className="top-questions">
-            <div>
-              <div>New to fantasy?</div>
-              <button onClick={() => window.location.href = 'https://www.rotowire.com/basketball/advice/'}>Learn more</button>
-            </div>
-            <div>
-              <div>How to find team and league ID:</div>
-              <button onClick={() => document.querySelector('.howto').scrollIntoView({ behavior: 'smooth' })}>Read below</button>
-            </div>
-          </div>
         </div>
-      </div>
-      <div className="about-box">
-        <h4>How do you find your league and team ID on for ESPN fantasy?</h4>
-        <div className="howto">
+        <div className="new-box">
           <div>
-            <div>If you're on desktop, the two ID's should be a paramateres in the link of your fantasy team page. Simply log in, click on the desired team, and look at the link.</div>
-            <div className="home-example">
-              {example[0] ? (
-                <div onClick={() => changeExample(0)}>Hide Example</div>
-              ) : (
-                <div onClick={() => changeExample(0)}>Show Example</div>
-              )}
-              {example[0] && (
-                <img src="/src/pages/assets/desktophowto.gif" />
-              )}
-            </div>
-          </div>
-          <div>
-            <div>In the mobile app, the league ID is located in the league info tab, which can be navigated to through My Team-&gt;League-&gt;League Info.</div>
-            <div className="home-example">
-              {example[1] ? (
-                <div onClick={() => changeExample(1)}>Hide Example</div>
-              ) : (
-                <div onClick={() => changeExample(1)}>Show Example</div>
-              )}
-              {example[1] && (
-                <img src="/src/pages/assets/mobilehowto.gif" />
-              )}
-            </div>
+            <div>New to fantasy?</div>
+            <div>Fantasy sports is where players “draft” real sports players to teams to compete against other teams for better statistics. Check out <a href="https://www.rotowire.com/basketball/advice/">this guide</a> and how to play.</div>
           </div>
         </div>
       </div>
       <div className="info-boxes">
         <div className="about-box">
-          <h4>How does fantasy even work?</h4>
-          <div>If you're new to fantasy sports, here is a quick breakdown of how a H2H fantasy league works. Just like a real sports league, a fantasy league consists of players who act as managers over their own team. After players "draft" or select their own team based on real players of that sport, teams will face off against one another in week long matchups to see which team wins based on real statistics. For a further explanaition of how fantasy works, check out <a href="https://www.rotowire.com/basketball/advice/">this website</a>.</div>
+          <h4>How do you find your league and team ID on for ESPN fantasy?</h4>
+          <div className="howto">
+            <div>
+              <div>If you're on desktop, the two ID's should be a paramateres in the link of your fantasy team page. Simply log in, click on the desired team, and look at the link.</div>
+              <div className="home-example">
+                {example[0] ? (
+                  <div style={{width: "200px"}} onClick={() => changeExample(0)}>Hide Example</div>
+                ) : (
+                  <div style={{width: "200px"}} onClick={() => changeExample(0)}>Show Example</div>
+                )}
+                {example[0] && (
+                  <img src="/src/pages/assets/desktophowto.gif" />
+                )}
+              </div>
+            </div>
+            <div>
+              <div>In the mobile app, the league ID is located in the league info tab, which can be navigated to through My Team-&gt;League-&gt;League Info.</div>
+              <div className="home-example">
+                {example[1] ? (
+                  <div style={{width: "200px"}} onClick={() => changeExample(1)}>Hide Example</div>
+                ) : (
+                  <div style={{width: "200px"}} onClick={() => changeExample(1)}>Show Example</div>
+                )}
+                {example[1] && (
+                  <img src="/src/pages/assets/mobilehowto.gif" />
+                )}
+              </div>
+            </div>
+          </div>
         </div>
         <div className="about-box">
           <h4>What is this website?</h4>
