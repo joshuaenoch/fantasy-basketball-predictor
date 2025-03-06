@@ -50,7 +50,7 @@ export default function Home() {
     });
 
     const result = await response.json();
-    console.log(result);
+    window.location.href = '/league';
   };
 
   return (
@@ -70,7 +70,7 @@ export default function Home() {
         </div>
         <div className="fantasy-box">
           <div className="home-espn-league">
-            <div style={{marginBottom: "10px"}}>Have an ESPN league?</div>
+            <div style={{marginBottom: "10px"}}>Have an ESPN team?</div>
             <form className="fantasy-form" onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -84,7 +84,7 @@ export default function Home() {
                 onChange={(e) => setTeamId(e.target.value)}
                 placeholder="Team ID"
               />
-              <button type="submit" onClick={() => window.location.href = '/league'}>Submit</button>
+              <button type="submit">See Team</button>
             </form>
           </div>
         </div>

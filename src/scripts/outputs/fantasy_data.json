@@ -1,8 +1,8 @@
 {
-    "team_name": "Joshuas Team",
-    "wins": 11,
-    "losses": 3,
-    "standing": 2,
+    "team_name": "Joshua's Team",
+    "wins": 9,
+    "losses": 2,
+    "standing": 3,
     "roster": [
         {
             "name": "Giannis Antetokounmpo",
@@ -19,131 +19,125 @@
             "injured": false
         },
         {
-            "name": "James Harden",
+            "name": "Cade Cunningham",
             "position": "PG",
-            "avg_points": 43.0,
-            "avg_points_7": 46.75,
+            "avg_points": 48.57,
+            "avg_points_7": 44.25,
             "injured": false
         },
         {
-            "name": "Franz Wagner",
-            "position": "SF",
-            "avg_points": 42.23,
-            "avg_points_7": 34.67,
+            "name": "Jalen Williams",
+            "position": "PF",
+            "avg_points": 42.64,
+            "avg_points_7": 51.25,
             "injured": false
         },
         {
-            "name": "Jaren Jackson Jr.",
+            "name": "Zach LaVine",
+            "position": "SG",
+            "avg_points": 38.67,
+            "avg_points_7": 36.67,
+            "injured": false
+        },
+        {
+            "name": "Jakob Poeltl",
             "position": "C",
-            "avg_points": 40.61,
-            "avg_points_7": 33.33,
+            "avg_points": 36.76,
+            "avg_points_7": 36.33,
             "injured": true
         },
         {
-            "name": "Michael Porter Jr.",
-            "position": "SF",
-            "avg_points": 33.27,
-            "avg_points_7": 27.75,
-            "injured": false
-        },
-        {
-            "name": "Josh Giddey",
+            "name": "Tyler Herro",
             "position": "SG",
-            "avg_points": 35.35,
-            "avg_points_7": 42.0,
+            "avg_points": 40.86,
+            "avg_points_7": 39.67,
             "injured": false
         },
         {
-            "name": "Walker Kessler",
+            "name": "Bam Adebayo",
             "position": "C",
-            "avg_points": 37.43,
-            "avg_points_7": 33.0,
+            "avg_points": 39.08,
+            "avg_points_7": 54.0,
             "injured": false
+        },
+        {
+            "name": "John Collins",
+            "position": "PF",
+            "avg_points": 35.42,
+            "avg_points_7": 49.0,
+            "injured": true
+        },
+        {
+            "name": "Miles Bridges",
+            "position": "SF",
+            "avg_points": 36.3,
+            "avg_points_7": 42.75,
+            "injured": false
+        },
+        {
+            "name": "Brandon Ingram",
+            "position": "SF",
+            "avg_points": 37.11,
+            "avg_points_7": 0,
+            "injured": true
+        },
+        {
+            "name": "Chris Paul",
+            "position": "PG",
+            "avg_points": 32.17,
+            "avg_points_7": 31.67,
+            "injured": false
+        },
+        {
+            "name": "Myles Turner",
+            "position": "C",
+            "avg_points": 33.43,
+            "avg_points_7": 38.67,
+            "injured": false
+        },
+        {
+            "name": "Onyeka Okongwu",
+            "position": "C",
+            "avg_points": 30.76,
+            "avg_points_7": 37.67,
+            "injured": false
+        }
+    ],
+    "free_agents": [
+        {
+            "name": "Joel Embiid",
+            "position": "C",
+            "avg_points": 39.42,
+            "injured": true
+        },
+        {
+            "name": "Brandon Miller",
+            "position": "SF",
+            "avg_points": 34.7,
+            "injured": true
         },
         {
             "name": "Cameron Johnson",
             "position": "SF",
             "avg_points": 32.59,
-            "avg_points_7": 20.0,
+            "injured": false
+        },
+        {
+            "name": "Coby White",
+            "position": "PG",
+            "avg_points": 31.84,
             "injured": false
         },
         {
             "name": "Santi Aldama",
             "position": "PF",
             "avg_points": 29.79,
-            "avg_points_7": 32.0,
             "injured": false
         },
         {
-            "name": "Christian Braun",
-            "position": "SG",
-            "avg_points": 31.69,
-            "avg_points_7": 43.25,
-            "injured": false
-        },
-        {
-            "name": "Cam Thomas",
-            "position": "SG",
-            "avg_points": 32.05,
-            "avg_points_7": 23.5,
-            "injured": false
-        },
-        {
-            "name": "Donte DiVincenzo",
-            "position": "SG",
-            "avg_points": 25.96,
-            "avg_points_7": 39.6,
-            "injured": false
-        },
-        {
-            "name": "Fred VanVleet",
-            "position": "PG",
-            "avg_points": 34.24,
-            "avg_points_7": 23.0,
-            "injured": true
-        }
-    ],
-    "free_agents": [
-        {
-            "name": "Jalen Johnson",
-            "position": "PF",
-            "avg_points": 43.58,
-            "injured": true
-        },
-        {
-            "name": "John Collins",
-            "position": "PF",
-            "avg_points": 35.42,
-            "injured": true
-        },
-        {
-            "name": "Jalen Suggs",
-            "position": "PG",
-            "avg_points": 30.69,
-            "injured": true
-        },
-        {
-            "name": "Andrew Wiggins",
+            "name": "Tari Eason",
             "position": "SF",
-            "avg_points": 30.65,
-            "injured": true
-        },
-        {
-            "name": "Daniel Gafford",
-            "position": "C",
-            "avg_points": 30.61,
-            "injured": true
-        },
-        {
-            "name": "Dereck Lively II",
-            "position": "C",
-            "avg_points": 30.09,
-            "injured": true
-        },
-        {
-            "name": "Payton Pritchard",
-            "position": "PG",
-            "avg_points": 29.95,
+            "avg_points": 29.77,
             "injured": false
         },
         {
@@ -165,9 +159,27 @@
             "injured": true
         },
         {
+            "name": "Khris Middleton",
+            "position": "SF",
+            "avg_points": 27.83,
+            "injured": false
+        },
+        {
+            "name": "Keegan Murray",
+            "position": "PF",
+            "avg_points": 27.41,
+            "injured": false
+        },
+        {
             "name": "Goga Bitadze",
             "position": "C",
             "avg_points": 27.4,
+            "injured": false
+        },
+        {
+            "name": "Shaedon Sharpe",
+            "position": "SG",
+            "avg_points": 27.24,
             "injured": false
         },
         {
@@ -175,6 +187,12 @@
             "position": "C",
             "avg_points": 27.2,
             "injured": false
+        },
+        {
+            "name": "Jonathan Kuminga",
+            "position": "PF",
+            "avg_points": 27.09,
+            "injured": true
         },
         {
             "name": "De'Andre Hunter",
@@ -189,9 +207,21 @@
             "injured": true
         },
         {
+            "name": "Tyus Jones",
+            "position": "PG",
+            "avg_points": 26.75,
+            "injured": false
+        },
+        {
             "name": "Toumani Camara",
             "position": "PF",
             "avg_points": 26.74,
+            "injured": false
+        },
+        {
+            "name": "Dennis Schroder",
+            "position": "PG",
+            "avg_points": 26.72,
             "injured": false
         },
         {
@@ -201,9 +231,21 @@
             "injured": false
         },
         {
+            "name": "Malik Beasley",
+            "position": "SG",
+            "avg_points": 26.54,
+            "injured": false
+        },
+        {
             "name": "Jeremy Sochan",
             "position": "PF",
             "avg_points": 26.46,
+            "injured": false
+        },
+        {
+            "name": "Ausar Thompson",
+            "position": "SF",
+            "avg_points": 26.27,
             "injured": false
         },
         {
@@ -213,22 +255,16 @@
             "injured": true
         },
         {
-            "name": "Ben Simmons",
-            "position": "PG",
-            "avg_points": 25.87,
-            "injured": true
-        },
-        {
             "name": "Scoot Henderson",
             "position": "PG",
             "avg_points": 25.84,
             "injured": false
         },
         {
-            "name": "Andrew Nembhard",
-            "position": "PG",
-            "avg_points": 25.43,
-            "injured": false
+            "name": "Bennedict Mathurin",
+            "position": "SF",
+            "avg_points": 25.65,
+            "injured": true
         },
         {
             "name": "Ty Jerome",
@@ -237,21 +273,9 @@
             "injured": false
         },
         {
-            "name": "Caris LeVert",
-            "position": "SG",
-            "avg_points": 25.15,
-            "injured": false
-        },
-        {
             "name": "Brandin Podziemski",
             "position": "SG",
             "avg_points": 25.06,
-            "injured": false
-        },
-        {
-            "name": "Clint Capela",
-            "position": "C",
-            "avg_points": 24.6,
             "injured": false
         },
         {
@@ -265,6 +289,12 @@
             "position": "PF",
             "avg_points": 23.86,
             "injured": false
+        },
+        {
+            "name": "Malcolm Brogdon",
+            "position": "PG",
+            "avg_points": 23.38,
+            "injured": true
         },
         {
             "name": "Scotty Pippen Jr.",
@@ -294,19 +324,7 @@
             "name": "Kel'el Ware",
             "position": "C",
             "avg_points": 22.7,
-            "injured": false
-        },
-        {
-            "name": "Jabari Smith Jr.",
-            "position": "PF",
-            "avg_points": 22.52,
-            "injured": false
-        },
-        {
-            "name": "Stephon Castle",
-            "position": "PG",
-            "avg_points": 22.46,
-            "injured": false
+            "injured": true
         },
         {
             "name": "Aaron Wiggins",
@@ -325,18 +343,6 @@
             "position": "SG",
             "avg_points": 22.35,
             "injured": true
-        },
-        {
-            "name": "Nick Richards",
-            "position": "C",
-            "avg_points": 22.21,
-            "injured": false
-        },
-        {
-            "name": "Alex Caruso",
-            "position": "SG",
-            "avg_points": 21.59,
-            "injured": false
         },
         {
             "name": "Spencer Dinwiddie",
@@ -363,10 +369,10 @@
             "injured": false
         },
         {
-            "name": "Jaime Jaquez Jr.",
+            "name": "Zaccharie Risacher",
             "position": "SF",
-            "avg_points": 19.92,
-            "injured": true
+            "avg_points": 20.0,
+            "injured": false
         },
         {
             "name": "Max Christie",
@@ -378,12 +384,6 @@
             "name": "Andre Drummond",
             "position": "C",
             "avg_points": 19.14,
-            "injured": false
-        },
-        {
-            "name": "Bogdan Bogdanovic",
-            "position": "SG",
-            "avg_points": 18.53,
             "injured": false
         },
         {
@@ -399,9 +399,9 @@
             "injured": false
         },
         {
-            "name": "Reed Sheppard",
+            "name": "Dalton Knecht",
             "position": "SG",
-            "avg_points": 9.48,
+            "avg_points": 15.3,
             "injured": false
         }
     ],
@@ -412,9 +412,19 @@
             "average": 53.0
         },
         {
-            "name": "Caris LeVert",
-            "score": 136.0,
-            "average": 45.33
+            "name": "Shaedon Sharpe",
+            "score": 155.0,
+            "average": 38.75
+        },
+        {
+            "name": "Ausar Thompson",
+            "score": 150.0,
+            "average": 37.5
+        },
+        {
+            "name": "Coby White",
+            "score": 132.0,
+            "average": 44.0
         },
         {
             "name": "Zach Collins",
@@ -422,24 +432,9 @@
             "average": 40.33
         },
         {
-            "name": "Stephon Castle",
-            "score": 120.0,
-            "average": 40.0
-        },
-        {
             "name": "Ty Jerome",
             "score": 120.0,
             "average": 30.0
-        },
-        {
-            "name": "Andrew Nembhard",
-            "score": 120.0,
-            "average": 40.0
-        },
-        {
-            "name": "Nick Richards",
-            "score": 118.0,
-            "average": 29.5
         },
         {
             "name": "Toumani Camara",
@@ -447,14 +442,19 @@
             "average": 29.25
         },
         {
+            "name": "Tyus Jones",
+            "score": 116.0,
+            "average": 29.0
+        },
+        {
             "name": "Isaiah Collier",
             "score": 116.0,
             "average": 29.0
         },
         {
-            "name": "Brandin Podziemski",
-            "score": 114.0,
-            "average": 28.5
+            "name": "Khris Middleton",
+            "score": 115.0,
+            "average": 38.33
         }
     ]
 }

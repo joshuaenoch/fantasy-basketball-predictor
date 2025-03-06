@@ -108,9 +108,8 @@ export default function Predictions() {
         </div>
         <div className="stat-block" style={{display: "flex", flexDirection: "column", gap: "7px"}}>
           <strong>About</strong>
-          <div>The accuracy stats of the models are as follows: (insert them here)</div>
-          <button className="about-button" onClick={() => window.location.href = "/"}>Read More</button>
-          <button className="about-button" onClick={() => window.location.href = "/compare"}>Compare Players</button>
+          <div>The accuracy of model 1 is about 80%, and the accuarcy of model 2 is about 60%.</div>
+          <button className="about-button" onClick={() => window.location.href = "/"}>Learn More</button>
           <button className="about-button" onClick={() => window.location.href = "/league"}>Your League</button>
         </div>
       </div>

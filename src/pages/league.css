@@ -52,3 +52,16 @@ hr {
 /* .comparison-box div {
   width: 200px;
 } */
+
+.change-team {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  height: 20vh
+}
+
+.change-team input {
+  width: 95%;
+}

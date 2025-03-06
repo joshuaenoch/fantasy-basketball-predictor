@@ -14,6 +14,8 @@ export default function FantasyData() {
   const [comparingPlayers, setComparingPlayers] = useState([]);
   const [maxStats, setMaxStats] = useState({});
   const [comparingData, setComparingData] = useState([]);
+  const [leagueId, setLeagueId] = useState('');
+  const [teamId, setTeamId] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -130,12 +132,27 @@ export default function FantasyData() {
     }
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch('http://localhost:5000/run-script', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ leagueId, teamId }),
+    });
+
+    const result = await response.json();
+    window.location.href = '/league';
+  };
+
   return (
     <div style={{margin: '20px'}}>
       {data ? (
         <div style={{display: 'flex', justifyContent: 'space-between', width: "100%"}}>
           <div style={{display: 'flex', flexDirection: 'column', gap: '20px', width: "18%"}}>
-            <div className="league-box" style={{height: "82vh", overflow: "scroll"}}>
+            <div className="league-box" style={{height: "54vh", overflow: "scroll"}}>
               <div className="league-header">{data.team_name}</div>
               <div style={{color: data.standing<=4 ? 'green' : 'red'}}>{data.wins} W - {data.losses} L (Rank {data.standing}/10)</div>
               <hr />
@@ -156,6 +173,22 @@ export default function FantasyData() {
                 ))}
               </div>
             </div>
+            <form className="change-team" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                value={leagueId}
+                onChange={(e) => setLeagueId(e.target.value)}
+                placeholder="League ID"
+              />
+              <input
+                type="text"
+                value={teamId}
+                onChange={(e) => setTeamId(e.target.value)}
+                placeholder="Team ID"
+              />
+              <div style={{margin: "5px 0", fontSize: "14px"}}><a style={{color: "grey"}} href="./">How to find league and team ID</a></div>
+              <button type="submit">Change Team</button>
+            </form>
           </div>
           <div style={{display: 'flex', flexDirection: 'column', width: "50%"}}>
             <div className="comparison-box">
