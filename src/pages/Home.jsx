@@ -50,6 +50,7 @@ export default function Home() {
     });
 
     const result = await response.json();
+    localStorage.setItem('fantasyData', JSON.stringify(result));
     window.location.href = '/league';
   };
 

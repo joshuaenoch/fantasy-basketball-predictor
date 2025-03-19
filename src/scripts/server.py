@@ -73,8 +73,8 @@ def run_python_function(league_id, team_id):
     # Save data to JSON file
     os.makedirs("outputs", exist_ok=True)
     team_json = json.dumps(team_data, indent=4)
-    with open("outputs/fantasy_data.json", "w") as json_file:
-        json_file.write(team_json)
+    # with open("outputs/fantasy_data.json", "w") as json_file:
+    #     json_file.write(team_json)
 
     return team_data
 

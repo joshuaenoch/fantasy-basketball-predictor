@@ -20,11 +20,10 @@ export default function FantasyData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/src/scripts/outputs/fantasy_data.json');
-        const result = await response.json();
-        setData(result);
+        const result = localStorage.getItem('fantasyData');
+        setData(JSON.parse(result));
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data or no data:', error);
       }
     };
 
@@ -144,15 +143,24 @@ export default function FantasyData() {
     });
 
     const result = await response.json();
+    localStorage.setItem('fantasyData', JSON.stringify(result));
     window.location.href = '/league';
   };
 
+  if (data) {
+    console.log(data)
+    console.log(data.roster)
+  } else {
+    console.log("bruh")
+  }
+
   return (
     <div style={{margin: '20px'}}>
-      {data ? (
-        <div style={{display: 'flex', justifyContent: 'space-between', width: "100%"}}>
-          <div style={{display: 'flex', flexDirection: 'column', gap: '20px', width: "18%"}}>
-            <div className="league-box" style={{height: "54vh", overflow: "scroll"}}>
+      <div style={{display: 'flex', justifyContent: 'space-between', width: "100%"}}>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '20px', width: "18%"}}>
+          <div className="league-box" style={{height: "54vh", overflow: "scroll"}}>
+            {data ?
+            (<>
               <div className="league-header">{data.team_name}</div>
               <div style={{color: data.standing<=4 ? 'green' : 'red'}}>{data.wins} W - {data.losses} L (Rank {data.standing}/10)</div>
               <hr />
@@ -172,122 +180,142 @@ export default function FantasyData() {
                   </div>
                 ))}
               </div>
-            </div>
-            <form className="change-team" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                value={leagueId}
-                onChange={(e) => setLeagueId(e.target.value)}
-                placeholder="League ID"
-              />
-              <input
-                type="text"
-                value={teamId}
-                onChange={(e) => setTeamId(e.target.value)}
-                placeholder="Team ID"
-              />
-              <div style={{margin: "5px 0", fontSize: "14px"}}><a style={{color: "grey"}} href="./">How to find league and team ID</a></div>
-              <button type="submit">Change Team</button>
-            </form>
-          </div>
-          <div style={{display: 'flex', flexDirection: 'column', width: "50%"}}>
-            <div className="comparison-box">
-              {comparingPlayers.length > 0 ? (
-                comparingPlayers.map((player, index) => (
-                  <div key={index}>
-                    <p>{player[0]}</p>
-                    <hr className="hr2" />
-                    <p style={{color: parseFloat(player[28]) === maxStats["FPPG"] ? "green" : "inherit"}}>
-                      FPPG: {player[28]}
-                    </p>
-                    <p style={{color: parseFloat(player[33]) === maxStats["FPPG7"] ? "green" : "inherit"}}>
-                      7 Day FPPG: {player[33]}
-                    </p>
-                    <p style={{color: parseFloat(player[34]) === maxStats["FPPG30"] ? "green" : "inherit"}}>
-                      30 Day FPPG: {player[34]}
-                    </p>
-                    <hr className="hr2" />
-                    <p style={{color: parseFloat(player[7]) === maxStats["GP"] ? "green" : "inherit"}}>
-                      GP: {player[7]}
-                    </p>
-                    <p style={{color: parseFloat(player[27]) === maxStats["PPG"] ? "green" : "inherit"}}>
-                      PPG: {player[27]}
-                    </p>
-                    <p style={{color: parseFloat(player[22]) === maxStats["AST"] ? "green" : "inherit"}}>
-                      AST: {player[22]}
-                    </p>
-                    <p style={{color: parseFloat(player[21]) === maxStats["REB"] ? "green" : "inherit"}}>
-                      REB: {player[21]}
-                    </p>
-                    <p style={{color: parseFloat(player[23]) === maxStats["STL"] ? "green" : "inherit"}}>
-                      STL: {player[23]}
-                    </p>
-                    <p style={{color: parseFloat(player[24]) === maxStats["BLK"] ? "green" : "inherit"}}>
-                      BLK: {player[24]}
-                    </p>
-                    <p style={{color: parseFloat(player[25]) === maxStats["TOV"] ? "red" : "inherit"}}>
-                      TOV: {player[25]}
-                    </p>
-                    <p style={{color: "grey"}} onClick={() => setComparingPlayers(comparingPlayers.filter((p, i) => i !== index))}>
-                      Remove
-                    </p>
-                  </div>
-                ))
-              ) : (
-                <div>Click on player's names to begin comparing them</div>
-              )}
-            </div>
-          </div>
-          <div style={{display: 'flex', flexDirection: 'column', gap: '20px', width: "18%"}}>
-            <div className='league-box' style={{height: "37vh", overflow: "scroll"}}>
-                <div className="league-header">Top 10 Free Agents</div>
-                <div>Based on games from the last 7 days</div>
+            </>) : (
+              <>
+                <div className="league-header">Your Team</div>
+                <div style={{color: 'green'}}>? W - ? L (Rank ?/10)</div>
                 <hr />
-                <div style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "15px"
-                }}>
-                  {data.top_agents.map((player, index) => (
-                    <div key={index} onClick={() => addPlayer(player.name)}>
-                      <div>{index + 1}. <span style={{color: player.injured ? 'red' : 'inherit'}}>{player.name}{player.injured && <div>&nbsp;(OUT)</div>}</span></div>
-                      <div>7 day total points - {player.score}</div>
-                      <div>7 day average - <span style={{color: player.average >= 30 ? 'green' : 'grey'}}>{player.average}</span></div>
-                    </div>
-                  ))}
+                <div>Enter your league and team ID to see your team</div>
+              </>
+          )}
+          </div>
+          <form className="change-team" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={leagueId}
+              onChange={(e) => setLeagueId(e.target.value)}
+              placeholder="League ID"
+            />
+            <input
+              type="text"
+              value={teamId}
+              onChange={(e) => setTeamId(e.target.value)}
+              placeholder="Team ID"
+            />
+            <div style={{margin: "5px 0", fontSize: "14px"}}><a style={{color: "grey"}} href="./">How to find league and team ID</a></div>
+            <button type="submit">Change Team</button>
+          </form>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'column', width: "50%"}}>
+          <div className="comparison-box">
+            {comparingPlayers.length > 0 ? (
+              comparingPlayers.map((player, index) => (
+                <div key={index}>
+                  <p>{player[0]}</p>
+                  <hr className="hr2" />
+                  <p style={{color: parseFloat(player[28]) === maxStats["FPPG"] ? "green" : "inherit"}}>
+                    FPPG: {player[28]}
+                  </p>
+                  <p style={{color: parseFloat(player[33]) === maxStats["FPPG7"] ? "green" : "inherit"}}>
+                    7 Day FPPG: {player[33]}
+                  </p>
+                  <p style={{color: parseFloat(player[34]) === maxStats["FPPG30"] ? "green" : "inherit"}}>
+                    30 Day FPPG: {player[34]}
+                  </p>
+                  <hr className="hr2" />
+                  <p style={{color: parseFloat(player[7]) === maxStats["GP"] ? "green" : "inherit"}}>
+                    GP: {player[7]}
+                  </p>
+                  <p style={{color: parseFloat(player[27]) === maxStats["PPG"] ? "green" : "inherit"}}>
+                    PPG: {player[27]}
+                  </p>
+                  <p style={{color: parseFloat(player[22]) === maxStats["AST"] ? "green" : "inherit"}}>
+                    AST: {player[22]}
+                  </p>
+                  <p style={{color: parseFloat(player[21]) === maxStats["REB"] ? "green" : "inherit"}}>
+                    REB: {player[21]}
+                  </p>
+                  <p style={{color: parseFloat(player[23]) === maxStats["STL"] ? "green" : "inherit"}}>
+                    STL: {player[23]}
+                  </p>
+                  <p style={{color: parseFloat(player[24]) === maxStats["BLK"] ? "green" : "inherit"}}>
+                    BLK: {player[24]}
+                  </p>
+                  <p style={{color: parseFloat(player[25]) === maxStats["TOV"] ? "red" : "inherit"}}>
+                    TOV: {player[25]}
+                  </p>
+                  <p style={{color: "grey"}} onClick={() => setComparingPlayers(comparingPlayers.filter((p, i) => i !== index))}>
+                    Remove
+                  </p>
                 </div>
-            </div>
-            <div className='league-box' style={{height: "37vh", overflow: "scroll"}}>
-              <div className="league-header">All Players</div>
-              <div style={{display: "flex", flexDirection: "column", gap: "10px", margin:"10px 0"}}>
-                <div>
-                  <input type="checkbox" id="freeAgents" name="freeAgents" onChange={() => setFreeAgentsOnly(!freeAgentsOnly)}/>
-                  <label for="freeAgents" style={{marginLeft: "5px"}}>Free Agents Only</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="injured" name="injured" onChange={() => setHideInjured(!hideInjured)}/>
-                  <label for="injured" style={{marginLeft: "5px"}}>Hide Injured</label>
-                </div>
-                <input type="text" id="search" name="search" placeholder="Enter player name" style={{width: "90%"}} value={search} onChange={(e) => setSearch(e.target.value)}/>
-              </div>
+              ))
+            ) : (
+              <div>Click on player's names to begin comparing them</div>
+            )}
+          </div>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '20px', width: "18%"}}>
+          <div className='league-box' style={{height: "37vh", overflow: "scroll"}}>
+              <div className="league-header">Top 10 Free Agents</div>
+              <div>Based on games from the last 7 days</div>
+              <hr />
               <div style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "20px"
+                gap: "15px"
               }}>
-                {filteredAgents.map((player, index) => (
-                  <div key={index} onClick={() => addPlayer(player[0])}>
-                    <div style={{color: injuries.includes(player[0]) ? 'red' : 'inherit'}}>{player[0]} {injuries.includes(player[0]) && <span>(OUT)</span>}</div>
-                    <p>FPPG: {player[28]}</p>
-                  </div>
-                ))}
+                {data ? (
+                  data.top_agents.map((player, index) => (
+                    <div key={index} onClick={() => addPlayer(player.name)}>
+                      <div>
+                        {index + 1}.
+                        <span style={{ color: player.injured ? 'red' : 'inherit' }}>
+                          {player.name}
+                          {player.injured && <span>&nbsp;(OUT)</span>}
+                        </span>
+                      </div>
+                      <div>7 day total points - {player.score}</div>
+                      <div>
+                        7 day average -&nbsp;
+                        <span style={{ color: player.average >= 30 ? 'green' : 'grey' }}>
+                          {player.average}
+                        </span>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div>Enter your league and team ID to see top agents</div>
+                )}
               </div>
+          </div>
+          <div className='league-box' style={{height: "37vh", overflow: "scroll"}}>
+            <div className="league-header">All Players</div>
+            <div style={{display: "flex", flexDirection: "column", gap: "10px", margin:"10px 0"}}>
+              <div>
+                {data && <><input type="checkbox" id="freeAgents" name="freeAgents" onChange={() => setFreeAgentsOnly(!freeAgentsOnly)}/>
+                <label for="freeAgents" style={{marginLeft: "5px"}}>Free Agents Only</label></>}
+              </div>
+              <div>
+                <input type="checkbox" id="injured" name="injured" onChange={() => setHideInjured(!hideInjured)}/>
+                <label for="injured" style={{marginLeft: "5px"}}>Hide Injured</label>
+              </div>
+              <input type="text" id="search" name="search" placeholder="Enter player name" style={{width: "90%"}} value={search} onChange={(e) => setSearch(e.target.value)}/>
+            </div>
+            <div style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px"
+            }}>
+              {filteredAgents.map((player, index) => (
+                <div key={index} onClick={() => addPlayer(player[0])}>
+                  <div style={{color: injuries.includes(player[0]) ? 'red' : 'inherit'}}>{player[0]} {injuries.includes(player[0]) && <span>(OUT)</span>}</div>
+                  <p>FPPG: {player[28]}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      </div>
     </div>
   );
 }
