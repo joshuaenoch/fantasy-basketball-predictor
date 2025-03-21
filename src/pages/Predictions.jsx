@@ -39,6 +39,7 @@ export default function Predictions() {
       });
     }
     const fetchInjured = async () => {
+      // await fetch("http://localhost:5000/get-injured-players");
       fetch('/src/scripts/outputs/injuries.json')
       .then(response => response.text())
       .then(result => {

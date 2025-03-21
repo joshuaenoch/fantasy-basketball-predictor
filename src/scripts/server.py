@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-def run_python_function(league_id, team_id):
+def get_league_info(league_id, team_id):
     league = League(league_id=league_id, year=2025)
     teams = league.teams
 
@@ -85,8 +85,35 @@ def run_script():
     league_id = int(data["leagueId"])
     team_id = int(data["teamId"])
 
-    result = run_python_function(league_id, team_id)
+    result = get_league_info(league_id, team_id)
     return jsonify(result)
+
+
+@app.route("/get-injured-players", methods=["GET"])
+def get_injured_players():
+
+    league = League(league_id=2073613821, year=2025)
+    all_players = []
+
+    teams = league.teams
+    for team in teams:
+        for player in team.roster:
+            all_players.append(player)
+
+    free_agents = league.free_agents(size=None)
+    for player in free_agents:
+        all_players.append(player)
+
+    injured_players = []
+    for player in all_players:
+        if player.injured:
+            injured_players.append(player.name)
+
+    os.makedirs("outputs", exist_ok=True)
+    with open("outputs/injuries.json", "w") as f:
+        json.dump(injured_players, f)
+
+    return jsonify({"injured_players": injured_players})
 
 
 if __name__ == "__main__":

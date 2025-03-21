@@ -99,7 +99,6 @@ export default function FantasyData() {
     }
 
     let newCompData = [...comparingData]
-    // add the row of stats of the comparing players
     comparingPlayers.forEach(playerName => {
       const playerStats = allPlayers.find(player => player[0] === playerName);
       if (playerStats) {
